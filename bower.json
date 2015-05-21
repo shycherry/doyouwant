@@ -1,0 +1,19 @@
+{
+  "name": "doyouwant",
+  "version": "0.0.0",
+  "homepage": "https://github.com/shycherry/doyouwant",
+  "authors": [
+    "shycherry <vinpowful@free.fr>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper-elements": "polymer/paper-elements#~0.5.6"
+  }
+}

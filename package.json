@@ -3,6 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
+  "window":{
+    "width":1000,
+    "height":600,
+    "min_width":1000,
+    "max_width":1000,
+    "min_height":600,
+    "max_height":600
+  },
   "dependencies": {
     "nw": "^0.12.1"
   },
