@@ -3,21 +3,23 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "window":{
-    "width":1000,
-    "height":600,
-    "min_width":1000,
-    "max_width":1000,
-    "min_height":600,
-    "max_height":600
+  "node-main": "server.js",
+  "window": {
+    "width": 1000,
+    "height": 600,
+    "min_width": 1000,
+    "max_width": 1000,
+    "min_height": 600,
+    "max_height": 600
   },
   "dependencies": {
+    "IT_NODE": "shycherry/IT_NODE",
     "nw": "^0.12.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "nw"
+    "start": "nw"
   },
   "author": "",
   "license": "ISC"
