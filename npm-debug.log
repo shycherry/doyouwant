@@ -1,0 +1,112 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\iojs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\iojs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'Polymer/core-pages' ]
+2 info using npm@2.7.0
+3 info using node@v1.5.0
+4 verbose node symlink C:\Program Files\iojs\\node.exe
+5 warn package.json doyouwant@1.0.0 No description
+6 warn package.json doyouwant@1.0.0 No repository field.
+7 warn package.json doyouwant@1.0.0 No README data
+8 warn package.json IT_NODE@0.0.1 No description
+9 warn package.json IT_NODE@0.0.1 No repository field.
+10 silly cache add args [ 'Polymer/core-pages', null ]
+11 verbose cache add spec Polymer/core-pages
+12 silly cache add parsed spec { raw: 'Polymer/core-pages',
+12 silly cache add   scope: null,
+12 silly cache add   name: null,
+12 silly cache add   rawSpec: 'Polymer/core-pages',
+12 silly cache add   spec: 'Polymer/core-pages',
+12 silly cache add   type: 'github' }
+13 info maybeGithub Attempting Polymer/core-pages from git://github.com/Polymer/core-pages
+14 verbose addRemoteGit u="git://github.com/Polymer/core-pages" silent=true
+15 silly addRemoteGit normalized { url: 'git://github.com/Polymer/core-pages', branch: 'master' }
+16 silly addRemoteGit v git-github-com-Polymer-core-pages-c79ba8cf
+17 verbose addRemoteGit C:\Users\idx26_000\AppData\Roaming\npm-cache\_git-remotes\git-github-com-Polymer-core-pages-c79ba8cf not in flight; cloning
+18 info git [ 'clone',
+18 info git   '--template=C:\\Users\\idx26_000\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates',
+18 info git   '--mirror',
+18 info git   'git://github.com/Polymer/core-pages',
+18 info git   'C:\\Users\\idx26_000\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-Polymer-core-pages-c79ba8cf' ]
+19 verbose git clone git://github.com/Polymer/core-pages Cloning into bare repository 'C:\Users\idx26_000\AppData\Roaming\npm-cache\_git-remotes\git-github-com-Polymer-core-pages-c79ba8cf'...
+20 info git [ 'fetch', '-a', 'origin' ]
+21 verbose git fetch -a origin (git://github.com/Polymer/core-pages)
+22 silly verifyOwnership skipping for windows
+23 info git [ 'rev-list', '-n1', 'master' ]
+24 verbose git rev-list -n1 master 68b44bb1b1f1a8cde5625924904b562e4ab7de78
+25 verbose resolved git url git://github.com/Polymer/core-pages#68b44bb1b1f1a8cde5625924904b562e4ab7de78
+26 info git [ 'clone',
+26 info git   'C:\\Users\\idx26_000\\AppData\\Roaming\\npm-cache\\_git-remotes\\git-github-com-Polymer-core-pages-c79ba8cf',
+26 info git   'C:\\Users\\idx26_000\\AppData\\Local\\Temp\\npm-5284-d17d4ac7\\git-cache-3032532edefb\\68b44bb1b1f1a8cde5625924904b562e4ab7de78' ]
+27 verbose git clone from C:\Users\idx26_000\AppData\Roaming\npm-cache\_git-remotes\git-github-com-Polymer-core-pages-c79ba8cf
+28 verbose git clone Cloning into 'C:\Users\idx26_000\AppData\Local\Temp\npm-5284-d17d4ac7\git-cache-3032532edefb\68b44bb1b1f1a8cde5625924904b562e4ab7de78'...
+28 verbose git clone done.
+29 info git [ 'checkout', '68b44bb1b1f1a8cde5625924904b562e4ab7de78' ]
+30 verbose git checkout Note: checking out '68b44bb1b1f1a8cde5625924904b562e4ab7de78'.
+30 verbose git checkout
+30 verbose git checkout You are in 'detached HEAD' state. You can look around, make experimental
+30 verbose git checkout changes and commit them, and you can discard any commits you make in this
+30 verbose git checkout state without impacting any branches by performing another checkout.
+30 verbose git checkout
+30 verbose git checkout If you want to create a new branch to retain commits you create, you may
+30 verbose git checkout do so (now or later) by using -b with the checkout command again. Example:
+30 verbose git checkout
+30 verbose git checkout   git checkout -b new_branch_name
+30 verbose git checkout
+30 verbose git checkout HEAD is now at 68b44bb... Update README.md
+31 error addLocal Could not install C:\Users\idx26_000\AppData\Local\Temp\npm-5284-d17d4ac7\git-cache-3032532edefb\68b44bb1b1f1a8cde5625924904b562e4ab7de78
+32 info maybeGithub Attempting Polymer/core-pages from ssh://git@github.com:Polymer/core-pages
+33 verbose addRemoteGit u="ssh://git@github.com:Polymer/core-pages" silent=false
+34 silly addRemoteGit normalized { url: 'ssh://git@github.com/Polymer/core-pages',
+34 silly addRemoteGit   branch: 'master' }
+35 silly addRemoteGit v ssh-git-github-com-Polymer-core-pages-42342f86
+36 verbose addRemoteGit C:\Users\idx26_000\AppData\Roaming\npm-cache\_git-remotes\ssh-git-github-com-Polymer-core-pages-42342f86 not in flight; cloning
+37 info git [ 'clone',
+37 info git   '--template=C:\\Users\\idx26_000\\AppData\\Roaming\\npm-cache\\_git-remotes\\_templates',
+37 info git   '--mirror',
+37 info git   'ssh://git@github.com/Polymer/core-pages',
+37 info git   'C:\\Users\\idx26_000\\AppData\\Roaming\\npm-cache\\_git-remotes\\ssh-git-github-com-Polymer-core-pages-42342f86' ]
+38 verbose git clone ssh://git@github.com/Polymer/core-pages Cloning into bare repository 'C:\Users\idx26_000\AppData\Roaming\npm-cache\_git-remotes\ssh-git-github-com-Polymer-core-pages-42342f86'...
+38 verbose git clone ssh://git@github.com/Polymer/core-pages Warning: Permanently added 'github.com,192.30.252.128' (RSA) to the list of known hosts.
+39 info git [ 'fetch', '-a', 'origin' ]
+40 verbose git fetch -a origin (ssh://git@github.com/Polymer/core-pages) Warning: Permanently added 'github.com,192.30.252.130' (RSA) to the list of known hosts.
+41 silly verifyOwnership skipping for windows
+42 info git [ 'rev-list', '-n1', 'master' ]
+43 verbose git rev-list -n1 master 68b44bb1b1f1a8cde5625924904b562e4ab7de78
+44 verbose resolved git url git+ssh://git@github.com:Polymer/core-pages#68b44bb1b1f1a8cde5625924904b562e4ab7de78
+45 info git [ 'clone',
+45 info git   'C:\\Users\\idx26_000\\AppData\\Roaming\\npm-cache\\_git-remotes\\ssh-git-github-com-Polymer-core-pages-42342f86',
+45 info git   'C:\\Users\\idx26_000\\AppData\\Local\\Temp\\npm-5284-d17d4ac7\\git-cache-2c434403b0fc\\68b44bb1b1f1a8cde5625924904b562e4ab7de78' ]
+46 verbose git clone from C:\Users\idx26_000\AppData\Roaming\npm-cache\_git-remotes\ssh-git-github-com-Polymer-core-pages-42342f86
+47 verbose git clone Cloning into 'C:\Users\idx26_000\AppData\Local\Temp\npm-5284-d17d4ac7\git-cache-2c434403b0fc\68b44bb1b1f1a8cde5625924904b562e4ab7de78'...
+47 verbose git clone done.
+48 info git [ 'checkout', '68b44bb1b1f1a8cde5625924904b562e4ab7de78' ]
+49 verbose git checkout Note: checking out '68b44bb1b1f1a8cde5625924904b562e4ab7de78'.
+49 verbose git checkout
+49 verbose git checkout You are in 'detached HEAD' state. You can look around, make experimental
+49 verbose git checkout changes and commit them, and you can discard any commits you make in this
+49 verbose git checkout state without impacting any branches by performing another checkout.
+49 verbose git checkout
+49 verbose git checkout If you want to create a new branch to retain commits you create, you may
+49 verbose git checkout do so (now or later) by using -b with the checkout command again. Example:
+49 verbose git checkout
+49 verbose git checkout   git checkout -b new_branch_name
+49 verbose git checkout
+49 verbose git checkout HEAD is now at 68b44bb... Update README.md
+50 error addLocal Could not install C:\Users\idx26_000\AppData\Local\Temp\npm-5284-d17d4ac7\git-cache-2c434403b0fc\68b44bb1b1f1a8cde5625924904b562e4ab7de78
+51 verbose stack Error: EISDIR: illegal operation on a directory, read
+51 verbose stack     at Error (native)
+52 verbose cwd C:\Users\idx26_000\Documents\GitHub\doyouwant
+53 error Windows_NT 6.3.9600
+54 error argv "C:\\Program Files\\iojs\\\\node.exe" "C:\\Program Files\\iojs\\node_modules\\npm\\bin\\npm-cli.js" "install" "--save" "Polymer/core-pages"
+55 error node v1.5.0
+56 error npm  v2.7.0
+57 error code EISDIR
+58 error errno -4068
+59 error syscall read
+60 error EISDIR: illegal operation on a directory, read
+61 error If you need help, you may report this error at:
+61 error     <http://github.com/npm/npm/issues>
+62 verbose exit [ -4068, true ]
