@@ -6,10 +6,13 @@
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="bower_components/core-pages/core-pages.html"/>
-    <link rel="import" href="shy-cesarheart/shy-cesarheart.html"/>
+    <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
+    <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/>
     <style type="text/css">
-      body{
+      * /deep/ *{
         font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
+      }
+      body{
         background-image: url("paper-background-10.jpg");
         background-repeat: no-repeat;
         background-size: cover;
@@ -17,19 +20,13 @@
         -webkit-user-select: none;
       }
     </style>
-  
   </head>
 
   <body>
     <template is="auto-binding" id="app">
-      <core-pages selected="{{page}}" valueattr="app-page">
-        <section app-page="intro">
-          intro
-        </section>
-        <section app-page="next">
-          next
-        </section>
-        <shy-cesarheart app-page="doyouwant"></shy-cesarheart>
+      <core-pages id="pages" selected="{{page}}" valueattr="app-page">
+        <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
+        <dyw-cesarheart-page app-page="cesar"></dyw-cesarheart-page>
       </core-pages>
     </template>
     <script src="app.js"></script>

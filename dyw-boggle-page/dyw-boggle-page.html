@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
+
+<polymer-element name="dyw-boggle-page">
+<template>
+<div></div>
+  <shy-elt-boggle noTime eltSize="300">UOSEZWTRRACETONG</shy-elt-boggle>
+</template>
+<script>
+  Polymer('dyw-boggle-page',{
+    created : function(){
+      this._onKeyPress = function(){
+        console.log("hey !");
+      }.bind(this);
+    },
+    bindPage : function(){
+      document.addEventListener("keypress", this._onKeyPress);
+    },
+    unbindPage : function(){
+      document.removeEventListener("keypress", this._onKeyPress);
+    }
+  });
+</script>
+</polymer-element>

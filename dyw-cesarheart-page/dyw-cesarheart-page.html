@@ -1,0 +1,25 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
+<link rel="import" href="../dyw-cesarheart/dyw-cesarheart.html"/>
+
+<polymer-element name="dyw-cesarheart-page">
+<template>
+<div></div>
+  <dyw-cesarheart></dyw-cesarheart>
+</template>
+<script>
+  Polymer('dyw-cesarheart-page',{
+    created : function(){
+      this._onKeyPress = function(){
+        console.log("ave cesar !");
+      }.bind(this);
+    },
+    bindPage : function(){
+      document.addEventListener("keypress", this._onKeyPress);
+    },
+    unbindPage : function(){
+      document.removeEventListener("keypress", this._onKeyPress);
+    }
+  });
+</script>
+</polymer-element>
