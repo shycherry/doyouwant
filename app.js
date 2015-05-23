@@ -14,5 +14,6 @@ app.addEventListener("template-bound", function () {
     this.page = iPageName;
   }.bind(this);
 
-  switchPage("boggle");
+  // switchPage("boggle");
+  switchPage("crosswords");
 });

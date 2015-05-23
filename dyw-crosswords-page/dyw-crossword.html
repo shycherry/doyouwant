@@ -1,0 +1,34 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="dyw-crossword" attributes="word orientation eltSize">
+<template>
+  <style>
+    .case{
+      border: groove;
+      position: relative;
+      text-align: center;
+    }
+  </style>
+  <div id="container"></div>
+</template>
+<script>
+  Polymer('dyw-crossword',{
+    eltSize : 100,
+    orientation : "vertical",
+    domReady : function(){
+      for(var idx in this.word){
+        var divCase = document.createElement('div');
+        divCase.className = "case";
+        divCase.style.width = this.eltSize+"px";
+        divCase.style.height = this.eltSize+"px";
+
+        if(this.orientation != "vertical")
+          divCase.style.display = "inline-block";
+
+        divCase.textContent = this.word[idx];
+        this.$.container.appendChild(divCase);
+      }
+    }
+  });
+</script>
+</polymer-element>

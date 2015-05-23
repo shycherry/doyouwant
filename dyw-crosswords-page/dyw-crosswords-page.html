@@ -1,0 +1,32 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./dyw-crosswords.html"/>
+<link rel="import" href="./dyw-crossword.html"/>
+
+<polymer-element name="dyw-crosswords-page">
+<template>
+  <div>Voulez-vous... ?</div>
+  <dyw-crosswords>
+    <dyw-crossword word="test1" eltSize="50" orientation="vertical"></dyw-crossword>
+    <dyw-crossword word="test2" eltSize="50" orientation="horizontal"></dyw-crossword>
+  </dyw-crosswords>
+</template>
+<script>
+  Polymer('dyw-crosswords-page',{
+    created : function(){
+      this._showHint = function(iHintText){
+        this.$.hint.innerText = iHintText;
+      }.bind(this);
+
+      this._onKeyPress = function(ev){
+
+      }.bind(this);
+    },
+    bindPage : function(){
+      document.addEventListener("keypress", this._onKeyPress);
+    },
+    unbindPage : function(){
+      document.removeEventListener("keypress", this._onKeyPress);
+    }
+  });
+</script>
+</polymer-element>

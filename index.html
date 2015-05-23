@@ -8,6 +8,7 @@
     <link rel="import" href="bower_components/core-pages/core-pages.html"/>
     <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
     <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/>
+    <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/>
     <style type="text/css">
       * /deep/ *{
         font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
@@ -26,6 +27,7 @@
     <template is="auto-binding" id="app">
       <core-pages id="pages" selected="{{page}}" valueattr="app-page">
         <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
+        <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
         <dyw-cesarheart-page app-page="cesar"></dyw-cesarheart-page>
       </core-pages>
     </template>
