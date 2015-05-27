@@ -3,12 +3,34 @@
 
 <polymer-element name="dyw-crosswords">
 <template>
-  <content select="dyw-crossword"></content>
+  <style>
+    ::content dyw-crossword {
+      color: red;
+      position: relative;
+    };
+  </style>
+  <content id="crosswords" select="dyw-crossword"></content>
 </template>
 <script>
   Polymer('dyw-crosswords',{
-    created : function(){
-    }
+    ready : function(){
+      this.onMutation(this, this.childrenUpdated);
+      this.childrenUpdated();
+    },
+    childrenUpdated : function()
+    {
+      this.updateChildren();
+      this.onMutation(this, this.childrenUpdated);
+    },
+    updateChildren : function()
+    {
+      var crosswords = this.$.crosswords.getDistributedNodes();
+      for(var idx = 0; idx < crosswords.length; idx++)
+      {
+        var currentCrossword = crosswords[idx];
+        currentCrossword.style.top = -idx*100+"px";
+      }
+    },
   });
 </script>
 </polymer-element>
