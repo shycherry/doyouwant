@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="dyw-crossword" attributes="word orientation eltSize">
+<polymer-element name="dyw-crossword" attributes="word orientation caseSize">
 <template>
   <style>
     :host{
@@ -15,14 +15,14 @@
 </template>
 <script>
   Polymer('dyw-crossword',{
-    eltSize : 100,
+    caseSize : 100,
     orientation : "vertical",
     domReady : function(){
       for(var idx in this.word){
         var divCase = document.createElement('div');
         divCase.className = "case";
-        divCase.style.width = this.eltSize+"px";
-        divCase.style.height = this.eltSize+"px";
+        divCase.style.width = this.caseSize+"px";
+        divCase.style.height = this.caseSize+"px";
 
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";

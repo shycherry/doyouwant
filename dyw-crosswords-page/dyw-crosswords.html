@@ -1,21 +1,25 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="./dyw-crossword.html"/>
 
-<polymer-element name="dyw-crosswords">
+<polymer-element name="dyw-crosswords" attributes="caseSize">
 <template>
   <style>
     :host{
       display: block;
+      position: relative;
+      width: 500px;
+      height: 500px;
     }
     ::content dyw-crossword {
       color: red;
-      position: relative;
+      position: absolute;
     };
   </style>
   <content id="crosswords" select="dyw-crossword"></content>
 </template>
 <script>
   Polymer('dyw-crosswords',{
+    caseSize : 100,
     ready : function(){
       this.onMutation(this, this.childrenUpdated);
       this.childrenUpdated();
@@ -31,7 +35,9 @@
       for(var idx = 0; idx < crosswords.length; idx++)
       {
         var currentCrossword = crosswords[idx];
-        currentCrossword.style.top = -idx*56+"px";
+        currentCrossword.caseSize = this.caseSize;
+        currentCrossword.style.top = idx*(this.caseSize+6)+"px";
+        currentCrossword.style.left = idx*(this.caseSize+6)+"px";
       }
     },
   });
