@@ -15,6 +15,9 @@
       position: relative;
       text-align: center;
     }
+    .case.focus{
+      font-weight: bold;
+    }
   </style>
 </template>
 <script>
@@ -22,6 +25,23 @@
     caseSize : 100,
     orientation : "vertical",
     domReady : function(){
+
+      var onCaseOver = function(ev){
+        var currentNode = ev.path[0];
+        if(currentNode.classList.contains("case")){
+          currentNode.classList.add("focus");
+        }
+        console.log(ev);
+      };
+
+      var onCaseOut = function(ev){
+        var currentNode = ev.path[0];
+        if(currentNode.classList.contains("case")){
+          currentNode.classList.remove("focus");
+        }
+        console.log(ev);
+      };
+
       for(var idx in this.word){
         var divCase = document.createElement('div');
         divCase.className = "case";
@@ -32,8 +52,21 @@
           divCase.style.display = "inline-block";
 
         divCase.textContent = this.word[idx];
+        divCase.addEventListener("mouseover", onCaseOver);
+        divCase.addEventListener("mouseout", onCaseOut);
+
         this.shadowRoot.appendChild(divCase);
       }
+    },
+    getFocus : function()
+    {
+      this.classList.add("focus");
+      this.style.zIndex = 1;
+    },
+    lostFocus : function()
+    {
+      this.classList.remove("focus");
+      this.style.zIndex = "";
     }
   });
 </script>

@@ -6,6 +6,8 @@
   <style>
     :host{
       display: block;
+      overflow: hidden;
+      white-space: nowrap;
       position: relative;
       width: 500px;
       height: 500px;
@@ -26,18 +28,14 @@
       this.childrenUpdated();
       this.addEventListener("mouseover", function(ev){
         var currentNode = ev.toElement;
-        if(currentNode.nodeName == "DYW-CROSSWORD")
-        {
-          currentNode.classList.add("focus");
-          currentNode.style.zIndex = 1;
+        if(currentNode.nodeName == "DYW-CROSSWORD"){
+          currentNode.getFocus();
         }
       });
       this.addEventListener("mouseout", function(ev){
         var currentNode = ev.fromElement;
-        if(currentNode.nodeName == "DYW-CROSSWORD")
-        {
-          currentNode.classList.remove("focus");
-          currentNode.style.zIndex = "";
+        if(currentNode.nodeName == "DYW-CROSSWORD"){
+          currentNode.lostFocus();
         }
       });
     },
