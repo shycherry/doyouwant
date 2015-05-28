@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="dyw-crossmatchbox" attributes="id1 id2 n1 n2">
+<template>
+  <style>
+    :host{
+      display: none;
+    }
+  </style>
+</template>
+<script>
+  Polymer('dyw-crossmatchbox',{
+    id1 : '',
+    id2 : '',
+    n1 : 0,
+    n2 : 0,
+    domReady : function(){
+      for(var idx in this.word){
+        var divCase = document.createElement('div');
+        divCase.className = "case";
+        divCase.style.width = this.caseSize+"px";
+        divCase.style.height = this.caseSize+"px";
+
+        if(this.orientation != "vertical")
+          divCase.style.display = "inline-block";
+
+        divCase.textContent = this.word[idx];
+        this.shadowRoot.appendChild(divCase);
+      }
+    }
+  });
+</script>
+</polymer-element>

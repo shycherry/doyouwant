@@ -16,6 +16,7 @@
     };
   </style>
   <content id="crosswords" select="dyw-crossword"></content>
+  <content id="crossmatchboxes" select="dyw-crossmatchbox"></content>
 </template>
 <script>
   Polymer('dyw-crosswords',{
@@ -31,13 +32,39 @@
     },
     updateChildren : function()
     {
+      var positions = {};
       var crosswords = this.$.crosswords.getDistributedNodes();
       for(var idx = 0; idx < crosswords.length; idx++)
       {
         var currentCrossword = crosswords[idx];
         currentCrossword.caseSize = this.caseSize;
-        currentCrossword.style.top = idx*(this.caseSize+6)+"px";
-        currentCrossword.style.left = idx*(this.caseSize+6)+"px";
+        currentCrossword.style.top = "0px";
+        currentCrossword.style.left = "0px";
+        positions[currentCrossword.id] = {"x":0,"y":0};
+      }
+
+      var crosswordMatchBoxes = this.$.crossmatchboxes.getDistributedNodes();
+      for(var idx = 0; idx < crosswordMatchBoxes.length; idx++)
+      {
+        var currentCrossMatchBox = crosswordMatchBoxes[idx];
+        var crossword1 = this.querySelector('#'+currentCrossMatchBox.id1);
+        var crossword2 = this.querySelector('#'+currentCrossMatchBox.id2);
+
+        if(crossword2.orientation == "horizontal")
+        {
+          positions[crossword2.id].x = positions[crossword1.id].x + ((currentCrossMatchBox.n2-1)*(this.caseSize+6));
+          crossword2.style.left = positions[crossword2.id].x+"px";
+
+          positions[crossword2.id].y = positions[crossword1.id].y + ((currentCrossMatchBox.n1-1)*(this.caseSize+6));
+          crossword2.style.top = positions[crossword2.id].y+"px";
+        }else
+        {
+          positions[crossword2.id].x = positions[crossword1.id].x + ((currentCrossMatchBox.n1-1)*(this.caseSize+6));
+          crossword2.style.left = positions[crossword2.id].x+"px";
+
+          positions[crossword2.id].y = positions[crossword1.id].y - ((currentCrossMatchBox.n2-1)*(this.caseSize+6));
+          crossword2.style.top = positions[crossword2.id].y+"px";
+        }
       }
     },
   });
