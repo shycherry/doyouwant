@@ -30,12 +30,14 @@
         var currentNode = ev.toElement;
         if(currentNode.nodeName == "DYW-CROSSWORD"){
           currentNode.getFocus();
+          this._focusedCrossword = currentNode;
         }
       });
       this.addEventListener("mouseout", function(ev){
         var currentNode = ev.fromElement;
         if(currentNode.nodeName == "DYW-CROSSWORD"){
           currentNode.lostFocus();
+          this._focusedCrossword = null;
         }
       });
     },
@@ -81,6 +83,10 @@
         }
       }
     },
+    pushKey : function(iKey){
+      if(this._focusedCrossword)
+        this._focusedCrossword.pushKey(iKey);
+    }
   });
 </script>
 </polymer-element>

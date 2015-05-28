@@ -27,20 +27,18 @@
     domReady : function(){
 
       var onCaseOver = function(ev){
-        var currentNode = ev.path[0];
-        if(currentNode.classList.contains("case")){
-          currentNode.classList.add("focus");
+        var currentCase = ev.toElement;
+        if(currentCase.classList.contains("case")){
+          this.putFocus(currentCase);
         }
-        console.log(ev);
-      };
+      }.bind(this);
 
       var onCaseOut = function(ev){
-        var currentNode = ev.path[0];
-        if(currentNode.classList.contains("case")){
-          currentNode.classList.remove("focus");
+        var currentCase = ev.fromElement;
+        if(currentCase.classList.contains("case")){
+          this.removeFocus(currentCase);
         }
-        console.log(ev);
-      };
+      }.bind(this);
 
       for(var idx in this.word){
         var divCase = document.createElement('div');
@@ -67,6 +65,36 @@
     {
       this.classList.remove("focus");
       this.style.zIndex = "";
+      if(this._focusedCase)
+        this.removeFocus(this._focusedCase);
+    },
+    putFocus : function(iCase){
+      if(this._focusedCase)
+        this.removeFocus(this._focusedCase);
+      iCase.classList.add("focus");
+      this._focusedCase = iCase;
+    },
+    removeFocus : function(iCase){
+      if(this._focusedCase == iCase){
+        iCase.classList.remove("focus");
+        this._focusedCase = null;
+      }
+    },
+    focusNext : function(){
+      if(this._focusedCase){
+        var nextCase = this._focusedCase.nextElementSibling;
+        if(nextCase){
+          this.putFocus(nextCase);
+        }else{
+          this.removeFocus(this._focusedCase);
+        }
+      }
+    },
+    pushKey : function(iKey){
+      if(this._focusedCase){
+        this._focusedCase.textContent = iKey;
+        this.focusNext();
+      }
     }
   });
 </script>
