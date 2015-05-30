@@ -4,9 +4,10 @@ var switchPage = null;
 app.addEventListener("dom-change", function () {
 
   this.$.pages.addEventListener('iron-select', function(ev){
-    if(ev.detail.item.classList.contains("iron-selected"))
       ev.detail.item.bindPage();
-    else
+  });
+
+  this.$.pages.addEventListener('iron-deselect', function(ev){
       ev.detail.item.unbindPage();
   });
 
@@ -16,4 +17,5 @@ app.addEventListener("dom-change", function () {
 
   switchPage("boggle");
   // switchPage("crosswords");
+  // switchPage("cesarheart");
 });
