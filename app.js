@@ -1,10 +1,10 @@
 var app = document.querySelector('#app');
 var switchPage = null;
 
-app.addEventListener("template-bound", function () {
+app.addEventListener("dom-change", function () {
 
-  this.$.pages.addEventListener('core-select', function(ev){
-    if(ev.detail.isSelected)
+  this.$.pages.addEventListener('iron-select', function(ev){
+    if(ev.detail.item.classList.contains("iron-selected"))
       ev.detail.item.bindPage();
     else
       ev.detail.item.unbindPage();
@@ -14,6 +14,6 @@ app.addEventListener("template-bound", function () {
     this.page = iPageName;
   }.bind(this);
 
-  // switchPage("boggle");
-  switchPage("crosswords");
+  switchPage("boggle");
+  // switchPage("crosswords");
 });

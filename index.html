@@ -4,11 +4,15 @@
   <head>
     <title>Voulez-vous...? Hahein ?</title>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-    <link rel="import" href="bower_components/core-pages/core-pages.html"/>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script>
+      window.Polymer = window.Polymer || {};
+      window.Polymer.dom = 'shadow';
+    </script>
+    <link rel="import" href="bower_components/iron-pages/iron-pages.html"/>
     <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
-    <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/>
-    <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/>
+    <!-- <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/> -->
+    <!-- <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/> -->
     <style type="text/css">
       * /deep/ *{
         font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
@@ -24,12 +28,13 @@
   </head>
 
   <body>
-    <template is="auto-binding" id="app">
-      <core-pages id="pages" selected="{{page}}" valueattr="app-page">
+    <template is="dom-bind" id="app">
+      <iron-pages id="pages" selected="[[page]]" attr-for-selected="app-page">
+      <!-- <iron-pages id="pages" selected="{{page}}" valueattr="app-page"> -->
         <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
-        <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
-        <dyw-cesarheart-page app-page="cesar"></dyw-cesarheart-page>
-      </core-pages>
+        <!-- <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page> -->
+        <!-- <dyw-cesarheart-page app-page="cesar"></dyw-cesarheart-page> -->
+      </iron-pages>
     </template>
     <script src="app.js"></script>
   </body>
