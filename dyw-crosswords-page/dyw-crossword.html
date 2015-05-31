@@ -1,7 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="dyw-crossword" attributes="word orientation caseSize">
-<template>
+<dom-module name="dyw-crossword">
   <style>
     :host(.focus)
     {
@@ -20,12 +19,25 @@
       font-weight: bold;
     }
   </style>
-</template>
+
+  <template>
+    <content id="cases" select=".case"></content>
+  </template>
+</dom-module>
+
 <script>
-  Polymer('dyw-crossword',{
-    caseSize : 100,
-    orientation : "vertical",
-    domReady : function(){
+  Polymer({
+    is: "dyw-crossword",
+    properties:{
+      word:{type: String, value:""},
+      orientation:{type: String, value:"vertical"},
+      caseSize:{
+        type: Number,
+        value:100,
+        observer: "caseSizeChanged"
+      }
+    },
+    ready: function(){
 
       var onCaseOver = function(ev){
         var currentCase = ev.toElement;
@@ -44,8 +56,6 @@
       for(var idx in this.word){
         var divCase = document.createElement('div');
         divCase.className = "case";
-        divCase.style.width = this.caseSize+"px";
-        divCase.style.height = this.caseSize+"px";
 
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";
@@ -54,8 +64,20 @@
         divCase.addEventListener("mouseover", onCaseOver);
         divCase.addEventListener("mouseout", onCaseOut);
 
-        this.shadowRoot.appendChild(divCase);
+        this.$.cases.appendChild(divCase);
       }
+    },
+    resizeChildren: function(){
+      var cases = this.$.cases.getDistributedNodes();
+      for(var idx = 0; idx < cases.length; idx++)
+      {
+        var divCase = cases[idx];
+        divCase.style.width = this.caseSize+"px";
+        divCase.style.height = this.caseSize+"px";
+      }
+    },
+    caseSizeChanged: function(){
+      this.resizeChildren();
     },
     getFocus : function()
     {
@@ -99,4 +121,3 @@
     }
   });
 </script>
-</polymer-element>

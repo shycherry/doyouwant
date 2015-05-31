@@ -12,7 +12,7 @@
     <link rel="import" href="bower_components/iron-pages/iron-pages.html"/>
     <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
     <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/>
-    <!-- <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/> -->
+    <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/>
     <style type="text/css">
       * /deep/ *{
         font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
@@ -30,9 +30,8 @@
   <body>
     <template is="dom-bind" id="app">
       <iron-pages id="pages" selected="[[page]]" attr-for-selected="app-page">
-      <!-- <iron-pages id="pages" selected="{{page}}" valueattr="app-page"> -->
         <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
-        <!-- <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page> -->
+        <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
         <dyw-cesarheart-page app-page="cesarheart"></dyw-cesarheart-page>
       </iron-pages>
     </template>

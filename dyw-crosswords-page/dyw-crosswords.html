@@ -1,8 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
 <link rel="import" href="./dyw-crossword.html"/>
 
-<polymer-element name="dyw-crosswords" attributes="caseSize">
-<template>
+<dom-module name="dyw-crosswords">
   <style>
     :host{
       display: block;
@@ -17,15 +17,28 @@
       position: absolute;
     };
   </style>
-  <content id="crosswords" select="dyw-crossword"></content>
-  <content id="crossmatchboxes" select="dyw-crossmatchbox"></content>
-</template>
+
+  <template>
+    <content id="crosswords" select="dyw-crossword"></content>
+    <content id="crossmatchboxes" select="dyw-crossmatchbox"></content>
+  </template>
+</dom-module>
+
 <script>
-  Polymer('dyw-crosswords',{
-    caseSize : 100,
+  Polymer({
+    is: "dyw-crosswords",
+    behaviors: [Polymer.IronResizableBehavior],
+    properties:{
+      caseSize : {
+        type:Number,
+        value: 100,
+        observer: "caseSizeChanged"
+      }
+    },
     ready : function(){
-      this.onMutation(this, this.childrenUpdated);
-      this.childrenUpdated();
+      this.layoutChildren = this.layoutChildren.bind(this);
+
+      this.addEventListener("iron-resize", this.layoutChildren);
       this.addEventListener("mouseover", function(ev){
         var currentNode = ev.toElement;
         if(currentNode.nodeName == "DYW-CROSSWORD"){
@@ -41,13 +54,10 @@
         }
       });
     },
-    childrenUpdated : function()
-    {
-      this.updateChildren();
-      this.onMutation(this, this.childrenUpdated);
+    caseSizeChanged: function(){
+      // this.layoutChildren();
     },
-    updateChildren : function()
-    {
+    layoutChildren : function(){
       var positions = {};
       var crosswords = this.$.crosswords.getDistributedNodes();
       for(var idx = 0; idx < crosswords.length; idx++)
@@ -89,4 +99,3 @@
     }
   });
 </script>
-</polymer-element>

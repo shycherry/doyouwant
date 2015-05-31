@@ -15,7 +15,7 @@ app.addEventListener("dom-change", function () {
     this.page = iPageName;
   }.bind(this);
 
-  switchPage("boggle");
-  // switchPage("crosswords");
+  // switchPage("boggle");
+  switchPage("crosswords");
   // switchPage("cesarheart");
 });

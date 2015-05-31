@@ -1,19 +1,25 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="dyw-crossmatchbox" attributes="id1 id2 n1 n2">
-<template>
+<dom-module name="dyw-crossmatchbox">
   <style>
     :host{
       display: none;
     }
   </style>
-</template>
+  <template></template>
+</dom-module>
+
 <script>
-  Polymer('dyw-crossmatchbox',{
-    id1 : '',
-    id2 : '',
-    n1 : 0,
-    n2 : 0
+  Polymer({
+    is: "dyw-crossmatchbox",
+    properties:{
+      id1: {type: String, value: ""},
+      id2: {type: String, value: ""},
+      n1: {type: Number, value: 0},
+      n2: {type: Number, value: 0}
+    },
+    ready: function(){
+      this.id1;
+    }
   });
 </script>
-</polymer-element>

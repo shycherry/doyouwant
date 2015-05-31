@@ -3,19 +3,22 @@
 <link rel="import" href="./dyw-crossword.html"/>
 <link rel="import" href="./dyw-crossmatchbox.html"/>
 
-<polymer-element name="dyw-crosswords-page">
-<template>
-  <div>Voulez-vous... ?</div>
-  <dyw-crosswords id="crosswords" caseSize="50">
-    <dyw-crossword style="color:blue;" id="w1" word="test1" orientation="vertical"></dyw-crossword>
-    <dyw-crossword style="color:green;" id="w2" word="test2" orientation="horizontal"></dyw-crossword>
-    <dyw-crossword id="w3" word="test3" orientation="vertical"></dyw-crossword>
-    <dyw-crossmatchbox id1="w1" id2="w2" n1="4" n2="1"></dyw-crossmatchbox>
-    <dyw-crossmatchbox id1="w2" id2="w3" n1="3" n2="3"></dyw-crossmatchbox>
-  </dyw-crosswords>
-</template>
+<dom-module name="dyw-crosswords-page">
+  <template>
+    <div>Voulez-vous... ?</div>
+    <dyw-crosswords id="crosswords" case-size="50">
+      <dyw-crossword style="color:blue;" id="w1" word="test1" orientation="vertical"></dyw-crossword>
+      <dyw-crossword style="color:green;" id="w2" word="test2" orientation="horizontal"></dyw-crossword>
+      <dyw-crossword id="w3" word="test3" orientation="vertical"></dyw-crossword>
+      <dyw-crossmatchbox id1="w1" id2="w2" n1="4" n2="1"></dyw-crossmatchbox>
+      <dyw-crossmatchbox id1="w2" id2="w3" n1="3" n2="3"></dyw-crossmatchbox>
+    </dyw-crosswords>
+  </template>
+</dom-module>
+
 <script>
-  Polymer('dyw-crosswords-page',{
+  Polymer({
+    is: "dyw-crosswords-page",
     created : function(){
       this._showHint = function(iHintText){
         this.$.hint.innerText = iHintText;
@@ -33,4 +36,3 @@
     }
   });
 </script>
-</polymer-element>
