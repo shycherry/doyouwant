@@ -31,8 +31,7 @@
     properties:{
       caseSize : {
         type:Number,
-        value: 100,
-        observer: "caseSizeChanged"
+        value: 100
       }
     },
     ready : function(){
@@ -53,9 +52,6 @@
           this._focusedCrossword = null;
         }
       });
-    },
-    caseSizeChanged: function(){
-      // this.layoutChildren();
     },
     layoutChildren : function(){
       var positions = {};
@@ -91,6 +87,12 @@
           positions[crossword2.id].y = positions[crossword1.id].y - ((currentCrossMatchBox.n2-1)*(this.caseSize+6));
           crossword2.style.top = positions[crossword2.id].y+"px";
         }
+
+        var crossCase1 = crossword1.getCase(currentCrossMatchBox.n1);
+        var crossCase2 = crossword2.getCase(currentCrossMatchBox.n2);
+
+        crossword1.linkCases(currentCrossMatchBox.n1, crossCase2);
+        crossword2.linkCases(currentCrossMatchBox.n2, crossCase1);
       }
     },
     pushKey : function(iKey){

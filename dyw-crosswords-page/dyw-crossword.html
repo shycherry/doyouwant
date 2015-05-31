@@ -34,7 +34,7 @@
       caseSize:{
         type: Number,
         value:100,
-        observer: "caseSizeChanged"
+        observer: "resizeChildren"
       }
     },
     ready: function(){
@@ -76,9 +76,6 @@
         divCase.style.height = this.caseSize+"px";
       }
     },
-    caseSizeChanged: function(){
-      this.resizeChildren();
-    },
     getFocus : function()
     {
       this.classList.add("focus");
@@ -115,9 +112,24 @@
     },
     pushKey : function(iKey){
       if(this._focusedCase){
-        this._focusedCase.textContent = iKey;
+        this.setCaseText(this._focusedCase, iKey);
         this.focusNext();
       }
+    },
+    setCaseText : function(iCaseElt, iText){
+      iCaseElt.textContent = iText;
+      if(iCaseElt.linkedCase){
+        iCaseElt.linkedCase.textContent = iText;
+      }
+    },
+    getCase : function(iCaseIdx){
+      if(iCaseIdx > 0 && iCaseIdx <= this.$.cases.childElementCount){
+        return this.$.cases.children[iCaseIdx-1];
+      }
+    },
+    linkCases : function(iCaseIdx, iOtherCaseElt){
+      var localCase = this.getCase(iCaseIdx);
+      localCase.linkedCase = iOtherCaseElt;
     }
   });
 </script>
