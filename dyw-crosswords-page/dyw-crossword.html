@@ -32,6 +32,8 @@
     },
     ready: function(){
 
+      this.word = this.word.toUpperCase();
+
       var onCaseOver = function(ev){
         var currentCase = ev.toElement;
         if(currentCase.classList.contains("case")){
@@ -45,6 +47,35 @@
           this.removeFocus(currentCase);
         }
       }.bind(this);
+
+      var evalWord = function(ev){
+        var idx = 0;
+        var isOK = true;
+        var actualLength = 0;
+
+        for(idx = 0; idx < this.word.length; idx++){
+          var expectedLetter = this.word[idx];
+          var actualLetter = this.getCase(idx+1).letter;
+          if(actualLetter != " "){
+            actualLength++;
+          }
+          if(expectedLetter != actualLetter){
+            isOK = false;
+          }
+        }
+
+        var isKO = (!isOK) && (actualLength == this.word.length);
+        if(isOK){
+          this.fire("dyw-crossword-ok");
+        }else if(isKO){
+          this.fire("dyw-crossword-ko");
+        }
+      }.bind(this);
+
+      this.addEventListener("dyw-crosscase-letter-changed", evalWord);
+
+      this.addEventListener("dyw-crossword-ko", function(){console.log("ko !")});
+      this.addEventListener("dyw-crossword-ok", function(){console.log("ok !")});
 
       for(var idx in this.word){
         var divCase = document.createElement('dyw-crosscase');
