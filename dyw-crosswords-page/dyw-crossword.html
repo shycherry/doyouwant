@@ -1,27 +1,20 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="./dyw-crosscase.html"/>
 
 <dom-module name="dyw-crossword">
   <style>
     :host(.focus)
     {
       background-color: lightblue;
+      z-index: 1;
     }
     :host{
       display: inline-block;
     }
-    .case{
-      border: groove;
-      position: relative;
-      text-align: center;
-      vertical-align: middle;
-    }
-    .case.focus{
-      font-weight: bold;
-    }
   </style>
 
   <template>
-    <content id="cases" select=".case"></content>
+    <content id="cases" select="dyw-crosscase"></content>
   </template>
 </dom-module>
 
@@ -42,7 +35,7 @@
       var onCaseOver = function(ev){
         var currentCase = ev.toElement;
         if(currentCase.classList.contains("case")){
-          this.putFocus(currentCase);
+          this.putFocusOnCase(currentCase);
         }
       }.bind(this);
 
@@ -54,13 +47,13 @@
       }.bind(this);
 
       for(var idx in this.word){
-        var divCase = document.createElement('div');
+        var divCase = document.createElement('dyw-crosscase');
         divCase.className = "case";
 
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";
 
-        divCase.textContent = this.word[idx];
+        divCase.letter = this.word[idx];
         divCase.addEventListener("mouseover", onCaseOver);
         divCase.addEventListener("mouseout", onCaseOut);
 
@@ -79,32 +72,30 @@
     getFocus : function()
     {
       this.classList.add("focus");
-      this.style.zIndex = 1;
     },
     lostFocus : function()
     {
       this.classList.remove("focus");
-      this.style.zIndex = "";
       if(this._focusedCase)
         this.removeFocus(this._focusedCase);
     },
-    putFocus : function(iCase){
+    putFocusOnCase : function(iCase){
       if(this._focusedCase)
         this.removeFocus(this._focusedCase);
-      iCase.classList.add("focus");
+      iCase.getFocus();
       this._focusedCase = iCase;
     },
     removeFocus : function(iCase){
       if(this._focusedCase == iCase){
-        iCase.classList.remove("focus");
+        iCase.lostFocus();
         this._focusedCase = null;
       }
     },
-    focusNext : function(){
+    focusNextCase : function(){
       if(this._focusedCase){
         var nextCase = this._focusedCase.nextElementSibling;
         if(nextCase){
-          this.putFocus(nextCase);
+          this.putFocusOnCase(nextCase);
         }else{
           this.removeFocus(this._focusedCase);
         }
@@ -112,24 +103,14 @@
     },
     pushKey : function(iKey){
       if(this._focusedCase){
-        this.setCaseText(this._focusedCase, iKey);
-        this.focusNext();
-      }
-    },
-    setCaseText : function(iCaseElt, iText){
-      iCaseElt.textContent = iText;
-      if(iCaseElt.linkedCase){
-        iCaseElt.linkedCase.textContent = iText;
+        this._focusedCase.letter = iKey;
+        this.focusNextCase();
       }
     },
     getCase : function(iCaseIdx){
       if(iCaseIdx > 0 && iCaseIdx <= this.$.cases.childElementCount){
         return this.$.cases.children[iCaseIdx-1];
       }
-    },
-    linkCases : function(iCaseIdx, iOtherCaseElt){
-      var localCase = this.getCase(iCaseIdx);
-      localCase.linkedCase = iOtherCaseElt;
     }
   });
 </script>

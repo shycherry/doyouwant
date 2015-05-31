@@ -1,0 +1,44 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module name="dyw-crosscase">
+  <style>
+    :host{
+      display: block;
+      border: groove;
+      position: relative;
+      text-align: center;
+      vertical-align: middle;
+    }
+    :host(.focus){
+      font-weight: bold;
+    }
+  </style>
+  <template>[[letter]]</template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "dyw-crosscase",
+    properties:{
+      letter: {type: String, value: "", observer: "letterChanged"},
+      linkedCase: {type: Object}
+    },
+    ready: function(){
+
+    },
+    letterChanged: function(){
+      if(this.linkedCase){
+        this.linkedCase.letter = this.letter;
+      }
+      this.fire("dyw-crosscase-letter-changed");
+    },
+    getFocus : function()
+    {
+      this.classList.add("focus");
+    },
+    lostFocus : function()
+    {
+      this.classList.remove("focus");
+    }
+  });
+</script>

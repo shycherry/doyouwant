@@ -91,8 +91,8 @@
         var crossCase1 = crossword1.getCase(currentCrossMatchBox.n1);
         var crossCase2 = crossword2.getCase(currentCrossMatchBox.n2);
 
-        crossword1.linkCases(currentCrossMatchBox.n1, crossCase2);
-        crossword2.linkCases(currentCrossMatchBox.n2, crossCase1);
+        crossCase1.linkedCase = crossCase2;
+        crossCase2.linkedCase = crossCase1;
       }
     },
     pushKey : function(iKey){
