@@ -3,6 +3,14 @@
 
 <dom-module name="dyw-crossword">
   <style>
+    :host(.ok)
+    {
+      box-shadow: 0 0 10px green;
+    }
+    :host(.ko)
+    {
+      box-shadow: 0 0 10px red;
+    }
     :host(.focus)
     {
       background-color: lightblue;
@@ -67,8 +75,15 @@
         var isKO = (!isOK) && (actualLength == this.word.length);
         if(isOK){
           this.fire("dyw-crossword-ok");
+          this.classList.remove("ko");
+          this.classList.add("ok");
         }else if(isKO){
           this.fire("dyw-crossword-ko");
+          this.classList.remove("ok");
+          this.classList.add("ko");
+        }else{
+          this.classList.remove("ok");
+          this.classList.remove("ko");
         }
       }.bind(this);
 
@@ -84,7 +99,7 @@
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";
 
-        divCase.letter = this.word[idx];
+        // divCase.letter = this.word[idx];
         divCase.addEventListener("mouseover", onCaseOver);
         divCase.addEventListener("mouseout", onCaseOut);
 

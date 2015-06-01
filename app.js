@@ -11,11 +11,15 @@ app.addEventListener("dom-change", function () {
       ev.detail.item.unbindPage();
   });
 
-  switchPage = function(iPageName){
+  this.$.pages.addEventListener('dyw-page-finished', function(ev){
+      this.selectNext();
+  });
+
+  var switchPage = function(iPageName){
     this.page = iPageName;
   }.bind(this);
 
-  // switchPage("boggle");
-  switchPage("crosswords");
+  switchPage("boggle");
+  // switchPage("crosswords");
   // switchPage("cesarheart");
 });

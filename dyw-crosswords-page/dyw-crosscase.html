@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../dyw-cursor/dyw-cursor.html">
 
 <dom-module name="dyw-crosscase">
   <style>
@@ -12,8 +13,14 @@
     :host(.focus){
       font-weight: bold;
     }
+    :host(.focus) dyw-cursor{
+      display: inline-block;
+    }
+    :host dyw-cursor{
+      display: none;
+    }
   </style>
-  <template>[[letter]]</template>
+  <template>[[letter]]<dyw-cursor></dyw-cursor></template>
 </dom-module>
 
 <script>

@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
+<link rel="import" href="../dyw-cursor/dyw-cursor.html">
 
 <dom-module name="dyw-boggle-page">
   <style type="text/css">
@@ -12,19 +13,12 @@
       left: 50%;
       top: 0;
     }
-    @-webkit-keyframes blink {
-      from {-webkit-filter: opacity(0);}
-      to {-webkit-filter: opacity(1);}
-    }
-    #cursor {
-      -webkit-animation: blink 1s infinite;
-    }
   </style>
   <template>
     <div>Voulez-vous...trouver César ?</div>
     <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
     <div id="right">
-      <div><span id="currentKeys"></span><span id="cursor">|</span><span id="hint">Prête chère amie ? Bogglez !</span></div>
+      <div><span id="currentKeys"></span><dyw-cursor></dyw-cursor><span id="hint">Prête chère amie ? Bogglez !</span></div>
       <br/>
       <div>1. <span id="one"></span></div>
       <div>2. <span id="two"></span></div>
@@ -69,6 +63,7 @@
           this._clearKeys(true);
         }else if((currentWord == this._cesarSay) && !this._nbWordToFind ){
           this._showHint("OUAII !");
+          this.fire("dyw-page-finished");
         }else{
           this._idTime = setTimeout(this._clearKeys.bind(false), 1000);
         }
