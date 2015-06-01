@@ -6,14 +6,13 @@
   <style>
     :host{
       display: block;
-      overflow: hidden;
+      /*overflow: hidden;*/
       white-space: nowrap;
       position: relative;
       width: 500px;
-      height: 500px;
+      height: 100%;
     }
     ::content dyw-crossword {
-      color: red;
       position: absolute;
     };
   </style>
@@ -56,16 +55,17 @@
     layoutChildren : function(){
       var positions = {};
       var crosswords = this.$.crosswords.getDistributedNodes();
+
+      // init positions
       for(var idx = 0; idx < crosswords.length; idx++)
       {
         var currentCrossword = crosswords[idx];
-        currentCrossword.caseSize = this.caseSize;
-        currentCrossword.style.top = "0px";
-        currentCrossword.style.left = "0px";
         positions[currentCrossword.id] = {"x":0,"y":0};
       }
 
       var crosswordMatchBoxes = this.$.crossmatchboxes.getDistributedNodes();
+
+      // compute positions, link cases
       for(var idx = 0; idx < crosswordMatchBoxes.length; idx++)
       {
         var currentCrossMatchBox = crosswordMatchBoxes[idx];
@@ -74,18 +74,23 @@
 
         if(crossword2.orientation == "horizontal")
         {
-          positions[crossword2.id].x = positions[crossword1.id].x + ((currentCrossMatchBox.n2-1)*(this.caseSize+6));
-          crossword2.style.left = positions[crossword2.id].x+"px";
-
+          positions[crossword2.id].x = positions[crossword1.id].x - ((currentCrossMatchBox.n2-1)*(this.caseSize+6));
           positions[crossword2.id].y = positions[crossword1.id].y + ((currentCrossMatchBox.n1-1)*(this.caseSize+6));
-          crossword2.style.top = positions[crossword2.id].y+"px";
         }else
         {
           positions[crossword2.id].x = positions[crossword1.id].x + ((currentCrossMatchBox.n1-1)*(this.caseSize+6));
-          crossword2.style.left = positions[crossword2.id].x+"px";
-
           positions[crossword2.id].y = positions[crossword1.id].y - ((currentCrossMatchBox.n2-1)*(this.caseSize+6));
-          crossword2.style.top = positions[crossword2.id].y+"px";
+        }
+
+        var xOffset = Math.abs(Math.min(0, positions[crossword2.id].x));
+        var yOffset = Math.abs(Math.min(0, positions[crossword2.id].y));
+
+        // revalue positions ifn
+        if(xOffset || yOffset){
+          for(var key in positions){
+            positions[key].x += xOffset;
+            positions[key].y += yOffset;
+          }
         }
 
         var crossCase1 = crossword1.getCase(currentCrossMatchBox.n1);
@@ -94,6 +99,16 @@
         crossCase1.linkedCase = crossCase2;
         crossCase2.linkedCase = crossCase1;
       }
+
+      // apply the style
+      for(var idx = 0; idx < crosswords.length; idx++)
+      {
+        var currentCrossword = crosswords[idx];
+        currentCrossword.style.left = positions[currentCrossword.id].x+"px";
+        currentCrossword.style.top = positions[currentCrossword.id].y+"px";
+        currentCrossword.caseSize = this.caseSize;
+      }
+
     },
     pushKey : function(iKey){
       if(this._focusedCrossword)

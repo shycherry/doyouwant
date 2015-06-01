@@ -4,14 +4,30 @@
 <link rel="import" href="./dyw-crossmatchbox.html"/>
 
 <dom-module name="dyw-crosswords-page">
+  <style>
+    :host{
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
   <template>
     <div>Voulez-vous... ?</div>
-    <dyw-crosswords id="crosswords" case-size="50">
-      <dyw-crossword style="color:blue;" id="w1" word="test1" orientation="vertical"></dyw-crossword>
-      <dyw-crossword style="color:green;" id="w2" word="test2" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w3" word="test3" orientation="vertical"></dyw-crossword>
-      <dyw-crossmatchbox id1="w1" id2="w2" n1="4" n2="1"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w2" id2="w3" n1="3" n2="3"></dyw-crossmatchbox>
+    <dyw-crosswords style="width:100%;" id="crosswords" case-size="50">
+      <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal"></dyw-crossword>
+      <dyw-crossword id="w1" word="LANGUES" orientation="vertical"></dyw-crossword>
+      <dyw-crossword id="w2" word="ECRAN" orientation="horizontal"></dyw-crossword>
+      <dyw-crossword id="w3" word="PAPIER" orientation="vertical"></dyw-crossword>
+      <dyw-crossword id="w4" word="APERITIF" orientation="horizontal"></dyw-crossword>
+      <!-- <dyw-crossword id="w5" word="CHICOREE" orientation="vertical"></dyw-crossword> -->
+      <!-- <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal"></dyw-crossword> -->
+      <!-- <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical"></dyw-crossword> -->
+      <!-- <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal"></dyw-crossword> -->
+      <!-- <dyw-crossword id="w9" word="STYLO" orientation="vertical"></dyw-crossword> -->
+      <dyw-crossmatchbox id1="w0" id2="w1" n1="11" n2="5"></dyw-crossmatchbox>
+      <dyw-crossmatchbox id1="w1" id2="w2" n1="2" n2="4"></dyw-crossmatchbox>
+      <dyw-crossmatchbox id1="w0" id2="w3" n1="2" n2="2"></dyw-crossmatchbox>
+      <dyw-crossmatchbox id1="w3" id2="w4" n1="4" n2="5"></dyw-crossmatchbox>
     </dyw-crosswords>
   </template>
 </dom-module>

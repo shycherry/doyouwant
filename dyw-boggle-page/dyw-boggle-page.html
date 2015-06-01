@@ -9,14 +9,25 @@
       width: 100%;
     }
     #right{
+      overflow: hidden;
       position: absolute;
       left: 50%;
       top: 0;
+      width: 50%
+    }
+    #left{
+      overflow: hidden;
+      position: absolute;
+      left: 0%;
+      top: 0;
+      width: 50%;
     }
   </style>
   <template>
-    <div>Voulez-vous...trouver César ?</div>
-    <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
+    <div id="left">
+      <div>Voulez-vous...trouver César ?</div>
+      <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
+    </div>
     <div id="right">
       <div><span id="currentKeys"></span><dyw-cursor></dyw-cursor><span id="hint">Prête chère amie ? Bogglez !</span></div>
       <br/>
