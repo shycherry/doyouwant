@@ -15,11 +15,11 @@ app.addEventListener("dom-change", function () {
       this.selectNext();
   });
 
-  var switchPage = function(iPageName){
+  switchPage = function(iPageName){
     this.page = iPageName;
   }.bind(this);
 
-  // switchPage("boggle");
-  switchPage("crosswords");
+  switchPage("boggle");
+  // switchPage("crosswords");
   // switchPage("cesarheart");
 });
