@@ -36,12 +36,12 @@ function ack(data){
 function youdoHandler(err, itSocket){
   var count = 0;
 
-  itSocket.on("handshake", function(data, cb){
+  itSocket.once("handshake", function(data, cb){
     cb = cb || function(){};
     return cb("reçu:"+ JSON.stringify(data));
   });
 
-  itSocket.emit("handshake", "coucou", ack.bind(this));
+  itSocket.emit("handshake", "coucou", ack);
 };
 
 itNode.addService({
@@ -57,6 +57,6 @@ function connect(ipport){
     'args':['test', 'test2']
   };
 
-  itNode.callService( args, youdoHandler.bind(this) );
+  itNode.callService( args, youdoHandler );
 }
 
