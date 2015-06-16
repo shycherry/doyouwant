@@ -52,9 +52,8 @@ itNode.addService({
 function connect(ipport){
 
   var args = {
-    'node' : ipport,
-    'name':'youdo',
-    'args':['test', 'test2']
+    'node' : {"url" : url},
+    'name':'youdo'
   };
 
   itNode.callService( args, youdoHandler );
