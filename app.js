@@ -33,29 +33,36 @@ function ack(data){
   console.log(data);
 }
 
-function youdoHandler(err, itSocket){
-  var count = 0;
-
-  itSocket.once("handshake", function(data, cb){
-    cb = cb || function(){};
-    return cb("reçu:"+ JSON.stringify(data));
+function youdoHandler(data, itSocket){
+  console.log("log server side : " + data);
+  itSocket.on("mousemove", function(x,y){
+    console.log("received mouse "+x+" "+y);
   });
-
-  itSocket.emit("handshake", "coucou", ack);
+  return "echo "+data;
 };
 
 itNode.addService({
-  name : "youdo",
+  name : "echo",
   handler : youdoHandler
 });
 
 function connect(ipport){
 
   var args = {
-    'node' : {"url" : url},
-    'name':'youdo'
+    'it_service' : "ea71ec6f-cc19-445b-88f6-2ff12953bc45",
+    'params':'yo !'
   };
 
-  itNode.callService( args, youdoHandler );
+  itNode.callService( args )
+  .then(function(link){
+    console.log("log client side : "+link["link_response"]);
+    window.addEventListener("mousemove", function(ev){
+      link["link_socket"].emit("mousemove",ev.x, ev.y);
+    });
+  })
+  .catch(function(err){
+    console.error(err);
+  });
+
 }
 
