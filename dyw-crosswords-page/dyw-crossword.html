@@ -31,6 +31,7 @@
     is: "dyw-crossword",
     properties:{
       word:{type: String, value:""},
+      tip:{type: String, value:""},
       orientation:{type: String, value:"vertical"},
       caseSize:{
         type: Number,
@@ -89,9 +90,6 @@
 
       this.addEventListener("dyw-crosscase-letter-changed", evalWord);
 
-      this.addEventListener("dyw-crossword-ko", function(){console.log("ko !")});
-      this.addEventListener("dyw-crossword-ok", function(){console.log("ok !")});
-
       for(var idx in this.word){
         var divCase = document.createElement('dyw-crosscase');
         divCase.className = "case";
@@ -137,6 +135,16 @@
         this._focusedCase = null;
       }
     },
+    focusPreviousCase : function(){
+      if(this._focusedCase){
+        var previousCase = this._focusedCase.previousElementSibling;
+        if(previousCase){
+          this.putFocusOnCase(previousCase);
+        }else{
+          this.removeFocus(this._focusedCase);
+        }
+      }
+    },
     focusNextCase : function(){
       if(this._focusedCase){
         var nextCase = this._focusedCase.nextElementSibling;
@@ -151,6 +159,12 @@
       if(this._focusedCase){
         this._focusedCase.letter = iKey;
         this.focusNextCase();
+      }
+    },
+    popKey : function(){
+      if(this._focusedCase){
+        this._focusedCase.letter = " ";
+        this.focusPreviousCase();
       }
     },
     getCase : function(iCaseIdx){

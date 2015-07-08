@@ -19,8 +19,8 @@ app.addEventListener("dom-change", function () {
     this.page = iPageName;
   }.bind(this);
 
-  switchPage("boggle");
-  // switchPage("crosswords");
+  // switchPage("boggle");
+  switchPage("crosswords");
   // switchPage("cesarheart");
 });
 
@@ -28,10 +28,6 @@ var ITNode = require("IT_NODE").ITNode;
 
 var itNode = new ITNode();
 var myport = itNode.port;
-
-function ack(data){
-  console.log(data);
-}
 
 function youdoHandler(data, itSocket){
   console.log("log server side : " + data);
@@ -49,7 +45,7 @@ itNode.addService({
 function connect(ipport){
 
   var args = {
-    'it_service' : "ea71ec6f-cc19-445b-88f6-2ff12953bc45",
+    'it_service' : "73567ca7-3ed8-491c-82b7-627698b7a01e",
     'params':'yo !'
   };
 

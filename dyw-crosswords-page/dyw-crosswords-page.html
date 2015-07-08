@@ -10,20 +10,26 @@
       height: 100%;
       width: 100%;
     }
+    :host dyw-crossword.focus[orientation="vertical"]{
+      background-color: lightpink;
+    }
+    :host dyw-crossword.focus[orientation="horizontal"]{
+      background-color: lightblue;
+    }
   </style>
   <template>
     <div>Voulez-vous... ?</div>
-    <dyw-crosswords style="width:100%;" id="crosswords" case-size="50">
-      <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w1" word="LANGUES" orientation="vertical"></dyw-crossword>
-      <dyw-crossword id="w2" word="ECRAN" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w3" word="PAPIER" orientation="vertical"></dyw-crossword>
-      <dyw-crossword id="w4" word="APERITIF" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w5" word="YAOURT" orientation="vertical"></dyw-crossword>
-      <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical"></dyw-crossword>
-      <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w9" word="STYLO" orientation="vertical"></dyw-crossword>
+    <dyw-crosswords style="width:100%;" id="crosswords" case-size="50" tip-duration="10000">
+      <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal" tip="Matière style Français, sauf que ça n'a rien à voir..."></dyw-crossword>
+      <dyw-crossword id="w1" word="LANGUES" orientation="vertical" tip="Vivantes, devraient tourner 7 fois"></dyw-crossword>
+      <dyw-crossword id="w2" word="ECRAN" orientation="horizontal" tip="Fenêtre sur le monde"></dyw-crossword>
+      <dyw-crossword id="w3" word="PAPIER" orientation="vertical" tip="Négation de pier"></dyw-crossword>
+      <dyw-crossword id="w4" word="APERITIF" orientation="horizontal" tip="Rituel d'avant repas"></dyw-crossword>
+      <dyw-crossword id="w5" word="YAOURT" orientation="vertical" tip="Ce n'est pas un dessert !"></dyw-crossword>
+      <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal" tip="Bout de hérisson"></dyw-crossword>
+      <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical" tip="Autre nom d'une lichounerie"></dyw-crossword>
+      <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal" tip="Christian"></dyw-crossword>
+      <dyw-crossword id="w9" word="STYLO" orientation="vertical" tip="Tube pisseur d'encre"></dyw-crossword>
       <dyw-crossmatchbox id1="w0" id2="w1" n1="7" n2="2"></dyw-crossmatchbox>
       <dyw-crossmatchbox id1="w1" id2="w6" n1="5" n2="4"></dyw-crossmatchbox>
       <dyw-crossmatchbox id1="w6" id2="w9" n1="7" n2="2"></dyw-crossmatchbox>
@@ -46,14 +52,18 @@
       }.bind(this);
 
       this._onKeyPress = function(ev){
-        this.$.crosswords.pushKey(String.fromCharCode(ev.charCode).toUpperCase());
+        if(ev.keyCode == 8){
+          this.$.crosswords.popKey();
+        }else if(65 <= ev.keyCode && ev.keyCode <= 90){
+          this.$.crosswords.pushKey(String.fromCharCode(ev.keyCode).toUpperCase());
+        }
       }.bind(this);
     },
     bindPage : function(){
-      document.addEventListener("keypress", this._onKeyPress);
+      document.addEventListener("keydown", this._onKeyPress);
     },
     unbindPage : function(){
-      document.removeEventListener("keypress", this._onKeyPress);
+      document.removeEventListener("keydown", this._onKeyPress);
     }
   });
 </script>
