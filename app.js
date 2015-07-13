@@ -44,20 +44,28 @@ itNode.addService({
 
 function connect(ipport){
 
-  var args = {
-    'it_service' : "73567ca7-3ed8-491c-82b7-627698b7a01e",
-    'params':'yo !'
-  };
 
-  itNode.callService( args )
-  .then(function(link){
-    console.log("log client side : "+link["link_response"]);
-    window.addEventListener("mousemove", function(ev){
-      link["link_socket"].emit("mousemove",ev.x, ev.y);
+  return itNode.getManager()
+  .then(function(manager){
+    return manager.getUuidsDeepTaggedBy("echo")
+    .then(function(uuids){
+        var args = {
+          "it_service" : uuids[0],
+          "params" : "yo !"
+        };
+
+        return itNode.callService( args )
+        .then(function(link){
+          console.log("log client side : "+link["link_response"]);
+          window.addEventListener("mousemove", function(ev){
+            link["link_socket"].emit("mousemove",ev.x, ev.y);
+          });
+        })
+        .catch(function(err){
+          console.error(err);
+        });
+
     });
-  })
-  .catch(function(err){
-    console.error(err);
   });
 
 }
