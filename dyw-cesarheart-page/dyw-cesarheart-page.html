@@ -4,8 +4,8 @@
 
 <dom-module name="dyw-cesarheart-page">
   <template>
-  <div></div>
-    <dyw-cesarheart></dyw-cesarheart>
+    <dyw-cesarheart id="hearttext"></dyw-cesarheart>
+    <div id="change">change</div>
   </template>
 </dom-module>
 
@@ -16,6 +16,12 @@
       this._onKeyPress = function(){
         console.log("ave cesar !");
       }.bind(this);
+    },
+    listeners : {
+      "change.tap" :"changeStyle"
+    },
+    changeStyle : function(){
+      this.$.hearttext.switchStyle();
     },
     bindPage : function(){
       document.addEventListener("keypress", this._onKeyPress);

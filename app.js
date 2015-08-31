@@ -20,8 +20,8 @@ app.addEventListener("dom-change", function () {
   }.bind(this);
 
   // switchPage("boggle");
-  switchPage("crosswords");
-  // switchPage("cesarheart");
+  // switchPage("crosswords");
+  switchPage("cesarheart");
 });
 
 var ITNode = require("IT_NODE").ITNode;
