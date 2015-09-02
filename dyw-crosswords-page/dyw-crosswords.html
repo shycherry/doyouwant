@@ -53,6 +53,18 @@
           this._focusedCrossword = null;
         }
       });
+      this.addEventListener("dyw-crossword-resolution-changed", this.checkResolution);
+    },
+    checkResolution : function(){
+      var crosswords = this.$.crosswords.getDistributedNodes();
+      for(var idx = 0; idx < crosswords.length; idx++)
+      {
+        var currentCrossword = crosswords[idx];
+        if(!currentCrossword.classList.contains("ok")){
+          return;
+        }
+      }
+      this.fire("dyw-crosswords-resolved");
     },
     layoutChildren : function(){
       var positions = {};

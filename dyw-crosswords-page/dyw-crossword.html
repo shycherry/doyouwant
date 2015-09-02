@@ -74,17 +74,29 @@
         }
 
         var isKO = (!isOK) && (actualLength == this.word.length);
+        var notifyResolutionChanged = false;
         if(isOK){
-          this.fire("dyw-crossword-ok");
+          if(!this.classList.contains("ok")){
+            notifyResolutionChanged = true;
+          }
           this.classList.remove("ko");
           this.classList.add("ok");
         }else if(isKO){
-          this.fire("dyw-crossword-ko");
+          if(!this.classList.contains("ko")){
+            notifyResolutionChanged = true;
+          }
           this.classList.remove("ok");
           this.classList.add("ko");
         }else{
+          if(this.classList.contains("ok") || this.classList.contains("ko")){
+            notifyResolutionChanged = true;
+          }
           this.classList.remove("ok");
           this.classList.remove("ko");
+        }
+
+        if(notifyResolutionChanged){
+          this.fire("dyw-crossword-resolution-changed");
         }
       }.bind(this);
 
