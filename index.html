@@ -13,6 +13,7 @@
     <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
     <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/>
     <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/>
+    <link rel="import" href="dyw-player/dyw-player.html"/>
     <style type="text/css">
       * /deep/ *{
         font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
@@ -28,7 +29,13 @@
   </head>
 
   <body>
-    <!-- <audio src="la_flamme_lunettes_in_out.ogg" autoplay loop></audio> -->
+    <dyw-player>
+      <dyw-track src="music/1inout.ogg"></dyw-track>
+      <dyw-track src="music/2inout.ogg"></dyw-track>
+      <dyw-track src="music/3inout.ogg"></dyw-track>
+      <dyw-track src="music/4inout.ogg"></dyw-track>
+      <dyw-track src="music/5inout.ogg"></dyw-track>
+    </dyw-player>
     <template is="dom-bind" id="app">
       <iron-pages id="pages" selected="[[page]]" attr-for-selected="app-page">
         <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
