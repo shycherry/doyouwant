@@ -15,12 +15,12 @@
       this.$.audio.addEventListener("ended", this.playNext.bind(this));
     },
     getTracks : function(){
-      return Array.prototype.slice.call(this.$.tracks.getDistributedNodes());
+      return Array.prototype.slice.call(Polymer.dom(this.$.tracks).getDistributedNodes());
     },
     getNext : function(){
       var nextTrack = null;
       if(this.currentTrack){
-        nextTrack = this.currentTrack.nextElementSibling;
+        nextTrack = Polymer.dom(this.currentTrack).nextElementSibling;
       }
       this.currentTrack = nextTrack || this.getTracks()[0];
       return this.currentTrack;
