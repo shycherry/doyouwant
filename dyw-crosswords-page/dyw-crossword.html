@@ -45,14 +45,14 @@
 
       var onCaseOver = function(ev){
         var currentCase = ev.toElement;
-        if(currentCase.classList.contains("case")){
+        if(Polymer.dom(currentCase).classList.contains("case")){
           this.putFocusOnCase(currentCase);
         }
       }.bind(this);
 
       var onCaseOut = function(ev){
         var currentCase = ev.fromElement;
-        if(currentCase.classList.contains("case")){
+        if(Polymer.dom(currentCase).classList.contains("case")){
           this.removeFocus(currentCase);
         }
       }.bind(this);
@@ -76,23 +76,23 @@
         var isKO = (!isOK) && (actualLength == this.word.length);
         var notifyResolutionChanged = false;
         if(isOK){
-          if(!this.classList.contains("ok")){
+          if(!Polymer.dom(this).classList.contains("ok")){
             notifyResolutionChanged = true;
           }
-          this.classList.remove("ko");
-          this.classList.add("ok");
+          Polymer.dom(this).classList.remove("ko");
+          Polymer.dom(this).classList.add("ok");
         }else if(isKO){
-          if(!this.classList.contains("ko")){
+          if(!Polymer.dom(this).classList.contains("ko")){
             notifyResolutionChanged = true;
           }
-          this.classList.remove("ok");
-          this.classList.add("ko");
+          Polymer.dom(this).classList.remove("ok");
+          Polymer.dom(this).classList.add("ko");
         }else{
-          if(this.classList.contains("ok") || this.classList.contains("ko")){
+          if(Polymer.dom(this).classList.contains("ok") || Polymer.dom(this).classList.contains("ko")){
             notifyResolutionChanged = true;
           }
-          this.classList.remove("ok");
-          this.classList.remove("ko");
+          Polymer.dom(this).classList.remove("ok");
+          Polymer.dom(this).classList.remove("ko");
         }
 
         if(notifyResolutionChanged){
@@ -109,15 +109,15 @@
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";
 
-        // divCase.letter = this.word[idx];
         divCase.addEventListener("mouseover", onCaseOver);
         divCase.addEventListener("mouseout", onCaseOut);
 
-        this.$.cases.appendChild(divCase);
+        Polymer.dom(this.$.cases).appendChild(divCase);
       }
+      this.resizeChildren();
     },
     resizeChildren: function(){
-      var cases = this.$.cases.getDistributedNodes();
+      var cases = Polymer.dom(this.$.cases).getDistributedNodes();
       for(var idx = 0; idx < cases.length; idx++)
       {
         var divCase = cases[idx];
@@ -127,11 +127,11 @@
     },
     getFocus : function()
     {
-      this.classList.add("focus");
+      Polymer.dom(this).classList.add("focus");
     },
     lostFocus : function()
     {
-      this.classList.remove("focus");
+      Polymer.dom(this).classList.remove("focus");
       if(this._focusedCase)
         this.removeFocus(this._focusedCase);
     },
@@ -149,7 +149,7 @@
     },
     focusPreviousCase : function(){
       if(this._focusedCase){
-        var previousCase = this._focusedCase.previousElementSibling;
+        var previousCase = Polymer.dom(this._focusedCase).previousElementSibling;
         if(previousCase){
           this.putFocusOnCase(previousCase);
         }else{
@@ -159,7 +159,7 @@
     },
     focusNextCase : function(){
       if(this._focusedCase){
-        var nextCase = this._focusedCase.nextElementSibling;
+        var nextCase = Polymer.dom(this._focusedCase).nextElementSibling;
         if(nextCase){
           this.putFocusOnCase(nextCase);
         }else{

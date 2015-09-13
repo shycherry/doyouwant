@@ -56,11 +56,11 @@
       this.addEventListener("dyw-crossword-resolution-changed", this.checkResolution);
     },
     checkResolution : function(){
-      var crosswords = this.$.crosswords.getDistributedNodes();
+      var crosswords = Polymer.dom(this.$.crosswords).getDistributedNodes();
       for(var idx = 0; idx < crosswords.length; idx++)
       {
         var currentCrossword = crosswords[idx];
-        if(!currentCrossword.classList.contains("ok")){
+        if(!Polymer.dom(currentCrossword).classList.contains("ok")){
           return;
         }
       }
@@ -68,7 +68,7 @@
     },
     layoutChildren : function(){
       var positions = {};
-      var crosswords = this.$.crosswords.getDistributedNodes();
+      var crosswords = Polymer.dom(this.$.crosswords).getDistributedNodes();
 
       // init positions
       for(var idx = 0; idx < crosswords.length; idx++)
@@ -77,14 +77,14 @@
         positions[currentCrossword.id] = {"x":0,"y":0};
       }
 
-      var crosswordMatchBoxes = this.$.crossmatchboxes.getDistributedNodes();
+      var crosswordMatchBoxes = Polymer.dom(this.$.crossmatchboxes).getDistributedNodes();
 
       // compute positions, link cases
       for(var idx = 0; idx < crosswordMatchBoxes.length; idx++)
       {
         var currentCrossMatchBox = crosswordMatchBoxes[idx];
-        var crossword1 = this.querySelector('#'+currentCrossMatchBox.id1);
-        var crossword2 = this.querySelector('#'+currentCrossMatchBox.id2);
+        var crossword1 = Polymer.dom(this).querySelector('#'+currentCrossMatchBox.id1);
+        var crossword2 = Polymer.dom(this).querySelector('#'+currentCrossMatchBox.id2);
 
         if(crossword2.orientation == "horizontal")
         {
