@@ -34,22 +34,29 @@
       caseSize : {type:Number,value: 100}
     },
     ready : function(){
+      var filter = Array.prototype.filter;
       this.layoutChildren = this.layoutChildren.bind(this);
 
       this.addEventListener("iron-resize", this.layoutChildren);
       this.addEventListener("mouseover", function(ev){
-        var currentNode = ev.toElement;
-        if(currentNode.nodeName == "DYW-CROSSWORD"){
-          currentNode.getFocus();
-          this._focusedCrossword = currentNode;
-          this.$.tip.text = currentNode.tip;
+        var currentCrossword = filter.call(Polymer.dom(ev).path, function(elt){
+          return (elt.nodeName === "DYW-CROSSWORD");
+        })[0];
+
+        if(currentCrossword){
+          currentCrossword.getFocus();
+          this._focusedCrossword = currentCrossword;
+          this.$.tip.text = currentCrossword.tip;
           this.$.tip.show();
         }
       });
       this.addEventListener("mouseout", function(ev){
-        var currentNode = ev.fromElement;
-        if(currentNode.nodeName == "DYW-CROSSWORD"){
-          currentNode.lostFocus();
+        var currentCrossword = filter.call(Polymer.dom(ev).path, function(elt){
+          return (elt.nodeName === "DYW-CROSSWORD");
+        })[0];
+
+        if(currentCrossword){
+          currentCrossword.lostFocus();
           this._focusedCrossword = null;
         }
       });

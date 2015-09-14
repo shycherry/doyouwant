@@ -104,7 +104,7 @@
 
       for(var idx in this.word){
         var divCase = document.createElement('dyw-crosscase');
-        divCase.className = "case";
+        this.toggleClass("case", true, divCase);
 
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";
@@ -112,9 +112,9 @@
         divCase.addEventListener("mouseover", onCaseOver);
         divCase.addEventListener("mouseout", onCaseOut);
 
-        Polymer.dom(this.$.cases).appendChild(divCase);
+        Polymer.dom(this).appendChild(divCase);
       }
-      this.resizeChildren();
+      Polymer.dom.flush();
     },
     resizeChildren: function(){
       var cases = Polymer.dom(this.$.cases).getDistributedNodes();
@@ -180,8 +180,9 @@
       }
     },
     getCase : function(iCaseIdx){
-      if(iCaseIdx > 0 && iCaseIdx <= this.$.cases.childElementCount){
-        return this.$.cases.children[iCaseIdx-1];
+      var cases = Polymer.dom(this.$.cases).getDistributedNodes();
+      if(iCaseIdx > 0 && iCaseIdx <= cases.length){
+        return cases[iCaseIdx-1];
       }
     }
   });

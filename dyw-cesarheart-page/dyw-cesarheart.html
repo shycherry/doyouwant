@@ -174,11 +174,11 @@
     is: "dyw-cesarheart",
     switchStyle : function(){
       if(Polymer.dom(this.$.warped).classList.contains("heart")){
-        Polymer.Base.toggleClass("heart", false, this.$.warped);
-        Polymer.Base.toggleClass("question", true, this.$.warped);
+        this.toggleClass("heart", false, this.$.warped);
+        this.toggleClass("question", true, this.$.warped);
       }else{
-        Polymer.Base.toggleClass("heart", true, this.$.warped);
-        Polymer.Base.toggleClass("question", false, this.$.warped);
+        this.toggleClass("heart", true, this.$.warped);
+        this.toggleClass("question", false, this.$.warped);
       }
     }
   });
