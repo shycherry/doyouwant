@@ -1,4 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
 <link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
 <link rel="import" href="./dyw-cesarheart.html"/>
 
@@ -17,6 +18,9 @@
         console.log("ave cesar !");
       }.bind(this);
     },
+    behaviors: [
+      Polymer.NeonAnimatableBehavior
+    ],
     listeners : {
       "change.tap" :"changeStyle"
     },
