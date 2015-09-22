@@ -6,7 +6,6 @@
 <dom-module name="dyw-cesarheart-page">
   <template>
     <dyw-cesarheart id="hearttext"></dyw-cesarheart>
-    <div id="change">change</div>
   </template>
 </dom-module>
 
@@ -21,12 +20,6 @@
     behaviors: [
       Polymer.NeonAnimatableBehavior
     ],
-    listeners : {
-      "change.tap" :"changeStyle"
-    },
-    changeStyle : function(){
-      this.$.hearttext.switchStyle();
-    },
     bindPage : function(){
       document.addEventListener("keypress", this._onKeyPress);
     },
