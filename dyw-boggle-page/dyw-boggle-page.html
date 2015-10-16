@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
 <link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
 <link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../dyw-page/dyw-page.html"/>
 <link rel="import" href="../dyw-cursor/dyw-cursor.html">
 
 <dom-module name="dyw-boggle-page">
@@ -25,19 +26,21 @@
     }
   </style>
   <template>
-    <div id="left">
-      <div>Voulez-vous...trouver César ?</div>
-      <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
-    </div>
-    <div id="right">
-      <div><span id="currentKeys"></span><dyw-cursor></dyw-cursor><span id="hint">Prête chère amie ? Bogglez !</span></div>
-      <br/>
-      <div>1. <span id="one"></span></div>
-      <div>2. <span id="two"></span></div>
-      <div>3. <span id="three"></span></div>
-      <div>4. <span id="four"></span></div>
-      <div>5. <span id="five"></span></div>
-    </div>
+    <dyw-page transition-text="Un petit boggle...">
+      <div id="left">
+        <div>Voulez-vous...trouver César ?</div>
+        <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
+      </div>
+      <div id="right">
+        <div><span id="currentKeys"></span><dyw-cursor></dyw-cursor><span id="hint">Prête chère amie ? Bogglez !</span></div>
+        <br/>
+        <div>1. <span id="one"></span></div>
+        <div>2. <span id="two"></span></div>
+        <div>3. <span id="three"></span></div>
+        <div>4. <span id="four"></span></div>
+        <div>5. <span id="five"></span></div>
+      </div>
+    </dyw-page>
   </template>
 </dom-module>
 

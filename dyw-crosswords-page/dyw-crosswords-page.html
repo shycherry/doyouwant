@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
+<link rel="import" href="../dyw-page/dyw-page.html"/>
 <link rel="import" href="./dyw-crosswords.html"/>
 <link rel="import" href="./dyw-crossword.html"/>
 <link rel="import" href="./dyw-crossmatchbox.html"/>
@@ -19,28 +20,30 @@
     }
   </style>
   <template>
-    <div>Voulez-vous... ?</div>
-    <dyw-crosswords style="width:100%;" id="crosswords" case-size="50" tip-duration="10000">
-      <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal" tip="Matière style Français, sauf que ça n'a rien à voir..."></dyw-crossword>
-      <dyw-crossword id="w1" word="LANGUES" orientation="vertical" tip="Mortes ou vivantes, devraient toujours tourner 7 fois"></dyw-crossword>
-      <dyw-crossword id="w2" word="ECRAN" orientation="horizontal" tip="Fenêtre sur le monde"></dyw-crossword>
-      <dyw-crossword id="w3" word="PAPIER" orientation="vertical" tip="Négation de pier"></dyw-crossword>
-      <dyw-crossword id="w4" word="APERITIF" orientation="horizontal" tip="Rituel d'avant repas"></dyw-crossword>
-      <dyw-crossword id="w5" word="YAOURT" orientation="vertical" tip="Ce n'est pas un dessert !"></dyw-crossword>
-      <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal" tip="Bout de hérisson"></dyw-crossword>
-      <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical" tip="Autre nom d'une lichounerie"></dyw-crossword>
-      <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal" tip="Stylo d'informaticien"></dyw-crossword>
-      <dyw-crossword id="w9" word="STYLO" orientation="vertical" tip="Clavier de littéraire"></dyw-crossword>
-      <dyw-crossmatchbox id1="w0" id2="w1" n1="7" n2="2"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w1" id2="w6" n1="5" n2="4"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w6" id2="w9" n1="7" n2="2"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w9" id2="w8" n1="4" n2="2"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w8" id2="w7" n1="6" n2="5"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w7" id2="w2" n1="7" n2="3"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w0" id2="w5" n1="2" n2="2"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w0" id2="w3" n1="5" n2="5"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w3" id2="w4" n1="1" n2="2"></dyw-crossmatchbox>
-    </dyw-crosswords>
+    <dyw-page transition-text="Voulez-vous...?">
+      <div>Voulez-vous... ?</div>
+      <dyw-crosswords style="width:100%;" id="crosswords" case-size="50" tip-duration="10000">
+        <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal" tip="Matière style Français, sauf que ça n'a rien à voir..."></dyw-crossword>
+        <dyw-crossword id="w1" word="LANGUES" orientation="vertical" tip="Mortes ou vivantes, devraient toujours tourner 7 fois"></dyw-crossword>
+        <dyw-crossword id="w2" word="ECRAN" orientation="horizontal" tip="Fenêtre sur le monde"></dyw-crossword>
+        <dyw-crossword id="w3" word="PAPIER" orientation="vertical" tip="Négation de pier"></dyw-crossword>
+        <dyw-crossword id="w4" word="APERITIF" orientation="horizontal" tip="Rituel d'avant repas"></dyw-crossword>
+        <dyw-crossword id="w5" word="YAOURT" orientation="vertical" tip="Ce n'est pas un dessert !"></dyw-crossword>
+        <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal" tip="Bout de hérisson"></dyw-crossword>
+        <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical" tip="Autre nom d'une lichounerie"></dyw-crossword>
+        <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal" tip="Stylo d'informaticien"></dyw-crossword>
+        <dyw-crossword id="w9" word="STYLO" orientation="vertical" tip="Clavier de littéraire"></dyw-crossword>
+        <dyw-crossmatchbox id1="w0" id2="w1" n1="7" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w1" id2="w6" n1="5" n2="4"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w6" id2="w9" n1="7" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w9" id2="w8" n1="4" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w8" id2="w7" n1="6" n2="5"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w7" id2="w2" n1="7" n2="3"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w0" id2="w5" n1="2" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w0" id2="w3" n1="5" n2="5"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w3" id2="w4" n1="1" n2="2"></dyw-crossmatchbox>
+      </dyw-crosswords>
+    </dyw-page>
   </template>
 </dom-module>
 
