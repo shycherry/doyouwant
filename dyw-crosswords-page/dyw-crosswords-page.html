@@ -1,5 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
+<link rel="import" href="../dyw-page/dyw-page-behavior.html"/>
 <link rel="import" href="../dyw-page/dyw-page.html"/>
 <link rel="import" href="./dyw-crosswords.html"/>
 <link rel="import" href="./dyw-crossword.html"/>
@@ -9,11 +9,10 @@
   <style>
     :host{
       display: block;
-      height: 100%;
       width: 100%;
     }
     :host dyw-crossword.focus[orientation="vertical"]{
-      background-color: lightpink;
+      background-color: plum;
     }
     :host dyw-crossword.focus[orientation="horizontal"]{
       background-color: lightblue;
@@ -50,9 +49,7 @@
 <script>
   Polymer({
     is: "dyw-crosswords-page",
-    behaviors: [
-      Polymer.NeonAnimatableBehavior
-    ],
+    behaviors: [DYWPageBehavior],
     created : function(){
       this._onKeyPress = function(ev){
         if(ev.keyCode == 8){

@@ -1,13 +1,15 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
-<link rel="import" href="../bower_components/neon-animation/neon-animatable-behavior.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html"/>
+<link rel="import" href="../bower_components/iron-flex-layout/classes/iron-flex-layout.html"/>
+<link rel="import" href="dyw-page-behavior.html">
 <link rel="import" href="dyw-page-content.html">
 
 <dom-module name="dyw-page">
   <template>
     <neon-animated-pages id="pages" selected="text" attr-for-selected="local-page" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
-      <dyw-page-content local-page="text">{{transitionText}}</dyw-page-content>
+      <dyw-page-content local-page="text">
+        <div class="self-center">{{transitionText}}</div>
+      </dyw-page-content>
       <dyw-page-content local-page="content"><content></content></dyw-page-content>
     </neon-animated-pages>
   </template>
@@ -16,13 +18,10 @@
 <script>
   Polymer({
     is: "dyw-page",
+    behaviors: [DYWPageBehavior],
     properties:{
       transitionText: {type: String, value: "Blabla"}
     },
-    behaviors: [
-      Polymer.NeonAnimatableBehavior,
-      Polymer.IronResizableBehavior
-    ],
     ready : function(){
       this.$.pages.addEventListener('iron-select', function(ev){
         ev.stopPropagation();
