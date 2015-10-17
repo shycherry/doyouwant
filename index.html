@@ -9,8 +9,10 @@
       // window.Polymer = window.Polymer || {};
       // window.Polymer.dom = 'shadow';
     </script>
-    <link rel="import" href="bower_components/paper-styles/paper-styles.html"/>
+    <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html"/>
     <link rel="import" href="bower_components/iron-pages/iron-pages.html"/>
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html"/>
+    <link rel="import" href="bower_components/paper-tabs/paper-tab.html"/>
     <link rel="import" href="bower_components/neon-animation/neon-animated-pages.html"/>
     <link rel="import" href="bower_components/neon-animation/neon-animations.html"/>
     <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
@@ -31,19 +33,28 @@
     </style>
   </head>
 
-  <body fullbleed>
-    <dyw-player>
+  <body class="fullbleed">
+    <!-- <dyw-player>
       <dyw-track src="music/1inout.ogg"></dyw-track>
       <dyw-track src="music/2inout.ogg"></dyw-track>
       <dyw-track src="music/3inout.ogg"></dyw-track>
       <dyw-track src="music/4inout.ogg"></dyw-track>
       <dyw-track src="music/5inout.ogg"></dyw-track>
-    </dyw-player>
+    </dyw-player> -->
     <template is="dom-bind" id="app">
-
-      <neon-animated-pages id="pages" selected="[[page]]" attr-for-selected="app-page" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
-        <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
+      <style type="text/css">
+        #tabs {
+          background: lightgray;
+        }
+      </style>
+      <paper-tabs id="tabs" selected="{{page}}" attr-for-selected="app-page">
+        <paper-tab app-page="boggle">1</paper-tab>
+        <paper-tab app-page="crosswords">2</paper-tab>
+        <paper-tab app-page="cesarheart">3</paper-tab>
+      </paper-tabs>
+      <neon-animated-pages id="pages" selected="{{page}}" attr-for-selected="app-page" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
         <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
+        <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
         <dyw-cesarheart-page app-page="cesarheart"></dyw-cesarheart-page>
       </neon-animated-pages>
     </template>
