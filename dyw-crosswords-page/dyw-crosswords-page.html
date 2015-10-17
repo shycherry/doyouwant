@@ -20,7 +20,7 @@
     }
   </style>
   <template>
-    <dyw-page transition-text="Voulez-vous...?">
+    <dyw-page id="page" transition-text="Voulez-vous...?">
       <div>Voulez-vous... ?</div>
       <dyw-crosswords style="width:100%;" id="crosswords" case-size="50" tip-duration="10000">
         <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal" tip="Matière style Français, sauf que ça n'a rien à voir..."></dyw-crossword>
@@ -65,7 +65,10 @@
       this.addEventListener("dyw-crosswords-resolved", this.fire.bind(this, "dyw-page-finished"));
     },
     bindPage : function(){
-      document.addEventListener("keydown", this._onKeyPress);
+      this.$.page.startTransition()
+      .then(function(){
+        document.addEventListener("keydown", this._onKeyPress);
+      }.bind(this))
     },
     unbindPage : function(){
       document.removeEventListener("keydown", this._onKeyPress);

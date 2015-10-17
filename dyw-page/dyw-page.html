@@ -31,9 +31,14 @@
       this.$.pages.addEventListener('iron-deselect', function(ev){
         ev.stopPropagation();
       });
-      this.async(function(){
-        this.$.pages.selected = "content";
-      }.bind(this), 2000);
+    },
+    startTransition : function(){
+      return new Promise(function(resolve, reject){
+        this.async(function(){
+          this.$.pages.selected = "content";
+          resolve();
+        }.bind(this), 2000);
+      }.bind(this));
     }
   });
 </script>

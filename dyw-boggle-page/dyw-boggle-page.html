@@ -26,7 +26,7 @@
     }
   </style>
   <template>
-    <dyw-page transition-text="Un petit boggle...">
+    <dyw-page id="page" transition-text="Un petit boggle...">
       <div id="left">
         <div>Voulez-vous...trouver César ?</div>
         <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
@@ -92,7 +92,10 @@
       this._nbWordToFind = 5;
     },
     bindPage : function(){
-      document.addEventListener("keypress", this._onKeyPress);
+      this.$.page.startTransition()
+      .then(function(){
+        document.addEventListener("keypress", this._onKeyPress);
+      }.bind(this))
     },
     unbindPage : function(){
       document.removeEventListener("keypress", this._onKeyPress);

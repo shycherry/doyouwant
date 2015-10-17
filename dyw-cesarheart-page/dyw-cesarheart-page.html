@@ -6,7 +6,7 @@
 
 <dom-module name="dyw-cesarheart-page">
   <template>
-    <dyw-page transition-text="Coucou !">
+    <dyw-page id="page" transition-text="Coucou !">
       <dyw-cesarheart id="hearttext"></dyw-cesarheart>
     </dyw-page>
   </template>
@@ -24,7 +24,10 @@
       Polymer.NeonAnimatableBehavior
     ],
     bindPage : function(){
-      document.addEventListener("keypress", this._onKeyPress);
+      this.$.page.startTransition()
+      .then(function(){
+        document.addEventListener("keypress", this._onKeyPress);
+      }.bind(this))
     },
     unbindPage : function(){
       document.removeEventListener("keypress", this._onKeyPress);
