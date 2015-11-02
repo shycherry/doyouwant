@@ -26,7 +26,7 @@
     }
   </style>
   <template>
-    <dyw-page id="page" transition-text=[[title]]>
+    <dyw-page id="page" transition-text=[[getPageName()]]>
       <div id="left">
         <div>Voulez-vous...trouver César ?</div>
         <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
@@ -47,9 +47,9 @@
 <script>
   Polymer({
     is: "dyw-boggle-page",
-    behaviors: [DYWPageBehavior],
+    behaviors: [DYW.PageBehavior],
     created : function(){
-      this.title = "Un petit boggle...";
+      this.setPageName("Un petit boggle...");
       this._showHint = function(iHintText){
         this.$.hint.innerText = iHintText;
         this.fire("dyw-tip", iHintText);
@@ -91,7 +91,7 @@
       this._nbWordToFind = 5;
     },
     bindPage : function(){
-      this.fire("dyw-tip", this.title);
+      this.fire("dyw-tip", this.getPageName());
       this.$.page.startTransition()
       .then(function(){
         document.addEventListener("keypress", this._onKeyPress);

@@ -6,7 +6,7 @@
 
 <dom-module name="dyw-cesarheart-page">
   <template>
-    <dyw-page id="page" transition-text="{{title}}">
+    <dyw-page id="page" transition-text="{{getPageName()}}">
       <dyw-cesarheart id="hearttext"></dyw-cesarheart>
     </dyw-page>
   </template>
@@ -15,15 +15,15 @@
 <script>
   Polymer({
     is: "dyw-cesarheart-page",
-    behaviors: [DYWPageBehavior],
+    behaviors: [DYW.PageBehavior],
     created : function(){
-      this.title = "Coucou !"
+      this.setPageName("Coucou !");
       this._onKeyPress = function(){
         console.log("ave cesar !");
       }.bind(this);
     },
     bindPage : function(){
-      this.fire("dyw-tip", this.title);
+      this.fire("dyw-tip", this.getPageName());
       this.$.page.startTransition()
       .then(function(){
         document.addEventListener("keypress", this._onKeyPress);
