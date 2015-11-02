@@ -21,7 +21,6 @@
   <template>
     <content id="crosswords" select="dyw-crossword"></content>
     <content id="crossmatchboxes" select="dyw-crossmatchbox"></content>
-    <paper-toast duration=[[tipDuration]] text="test" id="tip"></paper-toast>
   </template>
 </dom-module>
 
@@ -30,7 +29,6 @@
     is: "dyw-crosswords",
     behaviors: [Polymer.IronResizableBehavior],
     properties:{
-      tipDuration : {type:Number, value: 5000},
       caseSize : {type:Number,value: 100}
     },
     ready : function(){
@@ -46,8 +44,7 @@
         if(currentCrossword){
           currentCrossword.getFocus();
           this._focusedCrossword = currentCrossword;
-          this.$.tip.text = currentCrossword.tip;
-          this.$.tip.show();
+          this.fire("dyw-tip", currentCrossword.tip);
         }
       });
       this.addEventListener("mouseout", function(ev){

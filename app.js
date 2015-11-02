@@ -15,6 +15,11 @@ app.addEventListener("dom-change", function () {
       this.selectNext();
   });
 
+  this.$.pages.addEventListener('dyw-tip', function(ev){
+    app.$.tip.text = ev.detail;
+    app.$.tip.show();
+  });
+
   switchPage = function(iPageName){
     this.page = iPageName;
   }.bind(this);

@@ -6,7 +6,7 @@
 
 <dom-module name="dyw-cesarheart-page">
   <template>
-    <dyw-page id="page" transition-text="Coucou !">
+    <dyw-page id="page" transition-text="{{title}}">
       <dyw-cesarheart id="hearttext"></dyw-cesarheart>
     </dyw-page>
   </template>
@@ -17,11 +17,13 @@
     is: "dyw-cesarheart-page",
     behaviors: [DYWPageBehavior],
     created : function(){
+      this.title = "Coucou !"
       this._onKeyPress = function(){
         console.log("ave cesar !");
       }.bind(this);
     },
     bindPage : function(){
+      this.fire("dyw-tip", this.title);
       this.$.page.startTransition()
       .then(function(){
         document.addEventListener("keypress", this._onKeyPress);

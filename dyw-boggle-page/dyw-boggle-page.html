@@ -26,7 +26,7 @@
     }
   </style>
   <template>
-    <dyw-page id="page" transition-text="Un petit boggle...">
+    <dyw-page id="page" transition-text=[[title]]>
       <div id="left">
         <div>Voulez-vous...trouver César ?</div>
         <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
@@ -49,8 +49,10 @@
     is: "dyw-boggle-page",
     behaviors: [DYWPageBehavior],
     created : function(){
+      this.title = "Un petit boggle...";
       this._showHint = function(iHintText){
         this.$.hint.innerText = iHintText;
+        this.fire("dyw-tip", iHintText);
       }.bind(this);
 
       this._clearKeys = function(iUpponSuccess){
@@ -89,10 +91,11 @@
       this._nbWordToFind = 5;
     },
     bindPage : function(){
+      this.fire("dyw-tip", this.title);
       this.$.page.startTransition()
       .then(function(){
         document.addEventListener("keypress", this._onKeyPress);
-      }.bind(this))
+      }.bind(this));
     },
     unbindPage : function(){
       document.removeEventListener("keypress", this._onKeyPress);
