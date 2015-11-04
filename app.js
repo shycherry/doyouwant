@@ -24,9 +24,9 @@ app.addEventListener("dom-change", function () {
     this.page = iPageName;
   }.bind(this);
 
-  switchPage("boggle");
+  // switchPage("boggle");
   // switchPage("crosswords");
-  // switchPage("cesarheart");
+  switchPage("cesarheart");
 });
 
 var ITNode = require("IT_NODE").ITNode;

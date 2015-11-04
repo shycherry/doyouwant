@@ -1,13 +1,29 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
+<link rel="import" href="../bower_components/iron-flex-layout/classes/iron-flex-layout.html"/>
 <link rel="import" href="../dyw-page/dyw-page-behavior.html"/>
 <link rel="import" href="../dyw-page/dyw-page.html"/>
 <link rel="import" href="./dyw-cesarheart.html"/>
+<link rel="import" href="../dyw-crosswords-page/dyw-crosswords.html"/>
+<link rel="import" href="../dyw-crosswords-page/dyw-crossword.html"/>
 
 <dom-module name="dyw-cesarheart-page">
   <template>
     <dyw-page id="page" transition-text="{{getPageName()}}">
-      <dyw-cesarheart id="hearttext"></dyw-cesarheart>
+      <div class="vertical layout center">
+        <dyw-cesarheart id="hearttext"></dyw-cesarheart>
+        <div class="horizontal layout">
+          <dyw-crosswords id="cw1" case-size="50">
+            <dyw-crossword id="w1" word="PAUL" orientation="horizontal" tip="1er"></dyw-crossword>
+          </dyw-crosswords>
+          <dyw-crosswords id="cw2" case-size="50">
+            <dyw-crossword id="w2" word="ARMAND" orientation="horizontal" tip="2ème"></dyw-crossword>
+          </dyw-crosswords>
+          <dyw-crosswords id="cw3" case-size="50">
+            <dyw-crossword id="w3" word="VINCENT" orientation="horizontal" tip="3ème"></dyw-crossword>
+          </dyw-crosswords>
+        </div>
+      </div>
     </dyw-page>
   </template>
 </dom-module>

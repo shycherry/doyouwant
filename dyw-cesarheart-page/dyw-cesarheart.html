@@ -182,7 +182,7 @@
       key: {type: String, value: "", observer: "keyChanged"}
     },
     ready : function(){
-      this.msg = "-J6'C3)K*N7(1IYY<RK0RU4OP017-+YRT<>X2/U3()TU3,/IX".split("");
+      this.msg = "DH XA ZIAL YHG W'PIGP KMNG, DBWPRS-VIFS Y'RSJCFGV".split("");
       this._msgback = this.msg;
     },
     switchStyle : function(){
@@ -209,11 +209,23 @@
       this.refreshDom();
     },
     _moveLetter : function(idxLetter, letterToAdd){
-      var nbSymbols = "Z".charCodeAt(0) - "'".charCodeAt(0);
-      var currentVal = this._msgback[idxLetter].toUpperCase().charCodeAt(0);
+      var currentText = this._msgback[idxLetter].toUpperCase();
       var letterToAddVal = letterToAdd.toUpperCase().charCodeAt(0);
-      var newletterVal = currentVal-letterToAddVal % (nbSymbols);
-      this.msg[idxLetter] = String.fromCharCode((newletterVal <0)? ("Z".charCodeAt(0) + newletterVal) : ("'".charCodeAt(0) + newletterVal));
+      var shift = letterToAddVal - 65;
+      shift = (26 - shift) % 26;
+      if( shift >= 0 && shift < 26){
+        this.msg[idxLetter] = this._caesarShift(currentText, shift);
+      }
+    },
+    _caesarShift : function (text, shift) {
+      var result = "";
+      for (var i = 0; i < text.length; i++) {
+          var c = text.charCodeAt(i);
+          if      (c >= 65 && c <=  90) result += String.fromCharCode((c - 65 + shift) % 26 + 65);  // Uppercase
+          else if (c >= 97 && c <= 122) result += String.fromCharCode((c - 97 + shift) % 26 + 97);  // Lowercase
+          else                          result += text.charAt(i);  // Copy
+      }
+      return result;
     }
   });
 </script>
