@@ -34,14 +34,14 @@
   </head>
 
   <body class="fullbleed">
-<!--     <dyw-player>
+    <dyw-player>
       <dyw-track src="music/1inout.ogg"></dyw-track>
       <dyw-track src="music/2inout.ogg"></dyw-track>
       <dyw-track src="music/3inout.ogg"></dyw-track>
       <dyw-track src="music/4inout.ogg"></dyw-track>
       <dyw-track src="music/5inout.ogg"></dyw-track>
     </dyw-player>
- -->    <template is="dom-bind" id="app">
+    <template is="dom-bind" id="app">
       <style type="text/css">
         #tabs {
           background: lightgray;
@@ -52,13 +52,13 @@
       </style>
       <paper-toast duration="5000" text="test" id="tip"></paper-toast>
       <paper-tabs id="tabs" selected="{{page}}" attr-for-selected="app-page">
-        <paper-tab app-page="boggle">1</paper-tab>
-        <paper-tab app-page="crosswords">2</paper-tab>
-        <paper-tab app-page="cesarheart">3</paper-tab>
+        <paper-tab app-page="crosswords">1er</paper-tab>
+        <paper-tab app-page="boggle">2ème</paper-tab>
+        <paper-tab app-page="cesarheart">3ème</paper-tab>
       </paper-tabs>
       <neon-animated-pages id="pages" selected="{{page}}" attr-for-selected="app-page" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
-        <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
         <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
+        <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
         <dyw-cesarheart-page app-page="cesarheart"></dyw-cesarheart-page>
       </neon-animated-pages>
     </template>

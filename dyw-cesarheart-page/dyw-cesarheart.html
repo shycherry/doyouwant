@@ -3,15 +3,17 @@
 
 <dom-module name="dyw-cesarheart">
   <style type='text/css'>
+    #warped {
+      position: relative;
+      display: block;
+      width:800px;
+      height:586px;
+      left: 50%;
+      margin-left: -400px;
+    }
 
-    #warped {position: relative; display: block; width:583px; height:586px;}
-
-    #warped>span[id^=w]:nth-of-type(n+0){display:block; position:absolute; transform-origin:50% 100%; }
-
-    #warped span{font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
-    line-height:0.55; white-space:pre; overflow:visible; text-align: center}
-
-    #warped * {transition : all, 1s;}
+    #warped>span{display:block; position:absolute; font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
+    line-height:0.55; white-space:pre; overflow:visible; text-align: center; transition : all, 1s;}
 
     #warped.heart #w0 {text-transform: uppercase; transform: rotate(-8.89rad); width: 17px; height: 20px; left: 236.1px; top: 421.15px;}
     #warped.heart #w1 {text-transform: uppercase; transform: rotate(-8.82rad); width: 12px; height: 20px; left: 217.29px; top: 407.23px;}
