@@ -31,6 +31,7 @@
     is: "dyw-crossword",
     properties:{
       word:{type: String, value:""},
+      userWord:{type: String, value:"", notify: true, readOnly: true},
       tip:{type: String, value:""},
       orientation:{type: String, value:"vertical"},
       caseSize:{
@@ -42,6 +43,12 @@
     ready: function(){
 
       this.word = this.word.toUpperCase();
+
+      var localUserWord = "";
+      for(idx = 0; idx < this.word.length; idx++)
+        localUserWord += " ";
+
+      this._setUserWord(localUserWord);
 
       var onCaseOver = function(ev){
         var currentCase = ev.toElement;
@@ -62,9 +69,11 @@
         var isOK = true;
         var actualLength = 0;
 
+        var localUserWord = "";
         for(idx = 0; idx < this.word.length; idx++){
           var expectedLetter = this.word[idx];
           var actualLetter = this.getCase(idx+1).letter;
+          localUserWord += actualLetter;
           if(actualLetter != " "){
             actualLength++;
           }
@@ -72,6 +81,7 @@
             isOK = false;
           }
         }
+        this._setUserWord(localUserWord);
 
         var isKO = (!isOK) && (actualLength == this.word.length);
         var notifyResolutionChanged = false;

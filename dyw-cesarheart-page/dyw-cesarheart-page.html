@@ -11,16 +11,16 @@
   <template>
     <dyw-page id="page" transition-text="{{getPageName()}}">
       <div class="vertical layout center">
-        <dyw-cesarheart id="hearttext"></dyw-cesarheart>
-        <div class="horizontal layout">
-          <dyw-crosswords id="cw1" case-size="50">
-            <dyw-crossword id="w1" word="PAUL" orientation="horizontal" tip="1er"></dyw-crossword>
+        <dyw-cesarheart id="hearttext" key="[[userKey]]"></dyw-cesarheart>
+        <div id="keysGroup" class="horizontal layout">
+          <dyw-crosswords id="cw1" resolved="{{resolved1}}" case-size="50">
+            <dyw-crossword id="w1" user-word="{{key1}}" word="PAUL" orientation="horizontal" tip="1er"></dyw-crossword>
           </dyw-crosswords>
-          <dyw-crosswords id="cw2" case-size="50">
-            <dyw-crossword id="w2" word="ARMAND" orientation="horizontal" tip="2ème"></dyw-crossword>
+          <dyw-crosswords id="cw2" resolved="{{resolved2}}" case-size="50">
+            <dyw-crossword id="w2" user-word="{{key2}}" word="ARMAND" orientation="horizontal" tip="2ème"></dyw-crossword>
           </dyw-crosswords>
-          <dyw-crosswords id="cw3" case-size="50">
-            <dyw-crossword id="w3" word="VINCENT" orientation="horizontal" tip="3ème"></dyw-crossword>
+          <dyw-crosswords id="cw3" resolved="{{resolved3}}" case-size="50">
+            <dyw-crossword id="w3" user-word="{{key3}}" word="VINCENT" orientation="horizontal" tip="3ème"></dyw-crossword>
           </dyw-crosswords>
         </div>
       </div>
@@ -32,21 +32,61 @@
   Polymer({
     is: "dyw-cesarheart-page",
     behaviors: [DYW.PageBehavior],
+    properties : {
+      userKey : {type : String, value : ""},
+      key1 : {type : String, value : ""},
+      key2 : {type : String, value : ""},
+      key3 : {type : String, value : ""},
+      resolved1 : {type : Boolean, value : false},
+      resolved2 : {type : Boolean, value : false},
+      resolved3 : {type : Boolean, value : false}
+    },
+    observers : [
+      "_updateUserKey(key1, key2, key3)",
+      "_updateResolution(resolved1, resolved2, resolved3)"
+    ],
     created : function(){
       this.setPageName("Coucou !");
-      this._onKeyPress = function(){
-        console.log("ave cesar !");
+
+      this._onKeyPress = function(ev){
+        if(ev.keyCode == 8){
+          this.$.w1.popKey();
+          this.$.w2.popKey();
+          this.$.w3.popKey();
+        }else if(65 <= ev.keyCode && ev.keyCode <= 90){
+          this.$.w1.pushKey(String.fromCharCode(ev.keyCode).toUpperCase());
+          this.$.w2.pushKey(String.fromCharCode(ev.keyCode).toUpperCase());
+          this.$.w3.pushKey(String.fromCharCode(ev.keyCode).toUpperCase());
+        }
       }.bind(this);
+    },
+    ready : function(){
+      this.$.cw1.addEventListener("dyw-crosswords-resolved", function(){
+        this.cw1Resolved = true;
+      }.bind(this));
+      this.$.cw2.addEventListener("dyw-crosswords-resolved", function(){
+        this.cw2Resolved = true;
+      }.bind(this));
+      this.$.cw3.addEventListener("dyw-crosswords-resolved", function(){
+        this.cw3Resolved = true;
+      }.bind(this));
+    },
+    _updateUserKey : function(key1, key2, key3){
+      this.userKey = ""+key1+key2+key3;
+    },
+    _updateResolution : function(resolved1, resolved2, resolved3){
+      if(resolved1 && resolved2 && resolved3)
+        this.$.hearttext.startAnim();
     },
     bindPage : function(){
       this.fire("dyw-tip", this.getPageName());
       this.$.page.startTransition()
       .then(function(){
-        document.addEventListener("keypress", this._onKeyPress);
+        document.addEventListener("keydown", this._onKeyPress);
       }.bind(this))
     },
     unbindPage : function(){
-      document.removeEventListener("keypress", this._onKeyPress);
+      document.removeEventListener("keydown", this._onKeyPress);
     }
   });
 </script>
