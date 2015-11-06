@@ -8,6 +8,23 @@
 <link rel="import" href="../dyw-crosswords-page/dyw-crossword.html"/>
 
 <dom-module name="dyw-cesarheart-page">
+  <style type="text/css">
+    :host{
+      width: 100%;
+    }
+    #cw1 {
+      width: 350px;
+      height: 200px;
+    }
+    #cw2 {
+      width: 450px;
+      height: 200px;
+    }
+    #cw3 {
+      width: 400px;
+      height: 200px;
+    }
+  </style>
   <template>
     <dyw-page id="page" transition-text="{{getPageName()}}">
       <div class="vertical layout center">
@@ -46,7 +63,7 @@
       "_updateResolution(resolved1, resolved2, resolved3)"
     ],
     created : function(){
-      this.setPageName("Coucou !");
+      this.setPageName("Le 3ème est le plus facile !");
 
       this._onKeyPress = function(ev){
         if(ev.keyCode == 8){

@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-ripple/paper-ripple.html">
 
 <dom-module name="dyw-cesarheart">
   <style type='text/css'>
@@ -167,7 +166,6 @@
 
   <template>
     <div id="warped" class="unfold">
-      <paper-ripple></paper-ripple>
       <span id='w0'>O</span><span id='w1'>h</span><span id='w2'> </span><span id='w3'>m</span><span id='w4'>a</span><span id='w5'> </span><span id='w6'>n</span><span id='w7'>i</span><span id='w8'>n</span><span id='w9'>i</span><span id='w10'> </span><span id='w11'>q</span><span id='w12'>u</span><span id='w13'>e</span><span id='w14'> </span><span id='w15'>j</span><span id='w16'>'</span><span id='w17'>a</span><span id='w18'>i</span><span id='w19'>m</span><span id='w20'>e</span><span id='w21'> </span><span id='w22'>t</span><span id='w23'>a</span><span id='w24'>n</span><span id='w25'>t</span><span id='w26'>,</span><span id='w27'> </span><span id='w28'>v</span><span id='w29'>o</span><span id='w30'>u</span><span id='w31'>l</span><span id='w32'>e</span><span id='w33'>z</span><span id='w34'>-</span><span id='w35'>v</span><span id='w36'>o</span><span id='w37'>u</span><span id='w38'>s</span><span id='w39'> </span><span id='w40'>m</span><span id='w41'>'</span><span id='w42'>é</span><span id='w43'>p</span><span id='w44'>o</span><span id='w45'>u</span><span id='w46'>s</span><span id='w47'>e</span><span id='w48'>r</span>
     </div>
   </template>
@@ -176,9 +174,6 @@
 <script>
   Polymer({
     is: "dyw-cesarheart",
-    listeners : {
-      "tap" :"switchStyle"
-    },
     properties:{
       msg: {type: Array, observer: "_refreshDom"},
       key: {type: String, value: "", observer: "_keyChanged"}
