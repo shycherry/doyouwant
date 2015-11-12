@@ -9,7 +9,7 @@
     "height": 768
   },
   "dependencies": {
-    "IT_NODE": "shycherry/IT_NODE#wip",
+    "IT_NODE": "shycherry/IT_NODE",
     "nw": "^0.12.1"
   },
   "devDependencies": {},
