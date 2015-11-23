@@ -32,7 +32,7 @@
   <template>
     <dyw-page id="page" transition-text=[[getPageName()]]>
       <div id="left">
-        <div>Voulez-vous...trouver César ?</div>
+        <div>Un petit boggle...</div>
         <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
       </div>
       <div id="right">
@@ -53,7 +53,7 @@
     is: "dyw-boggle-page",
     behaviors: [DYW.PageBehavior],
     created : function(){
-      this.setPageName("Un petit boggle...");
+      this.setPageName("Voulez-vous...trouver ce que dit César ?");
       this._showHint = function(iHintText){
         this.$.hint.innerText = iHintText;
         this.fire("dyw-tip", iHintText);
@@ -66,7 +66,7 @@
         else if(this._nbWordToFind)
           this._showHint("Mmmh... autre chose ?");
         else
-          this._showHint("OK bravo !... Alors que dit César ? :)");
+          this._showHint("OK bravo !... La clef est SCHATZ. Alors que dit César ? :)");
       }.bind(this);
 
       this._expectedWords = {"CAR":"one", "TON":"two", "SOU":"three", "ETAT":"four", "GERE":"five"};
