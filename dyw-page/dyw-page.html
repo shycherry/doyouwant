@@ -32,12 +32,15 @@
       });
     },
     startTransition : function(){
-      return new Promise(function(resolve, reject){
-        this.async(function(){
-          this.$.pages.selected = "content";
-          resolve();
-        }.bind(this), 2000);
-      }.bind(this));
+      if(!this.promise){
+        this.promise = new Promise(function(resolve, reject){
+          this.async(function(){
+            this.$.pages.selected = "content";
+            resolve();
+          }.bind(this), 10000);
+        }.bind(this));
+      }
+      return this.promise;
     }
   });
 </script>
