@@ -1,0 +1,23 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html"/>
+<link rel="import" href="dyw-page-behavior.html">
+
+<dom-module name="dyw-page-content">
+  <style type="text/css">
+    :host{
+      @apply(--layout-vertical);
+      @apply(--layout-center-center);
+      height: 100vh;
+    };
+  </style>
+  <template>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "dyw-page-content",
+    behaviors: [DYW.PageBehavior]
+  });
+</script>

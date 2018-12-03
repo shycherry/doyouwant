@@ -31,6 +31,8 @@
     is: "dyw-crossword",
     properties:{
       word:{type: String, value:""},
+      userWord:{type: String, value:"", notify: true, readOnly: true},
+      tip:{type: String, value:""},
       orientation:{type: String, value:"vertical"},
       caseSize:{
         type: Number,
@@ -42,16 +44,22 @@
 
       this.word = this.word.toUpperCase();
 
+      var localUserWord = "";
+      for(idx = 0; idx < this.word.length; idx++)
+        localUserWord += " ";
+
+      this._setUserWord(localUserWord);
+
       var onCaseOver = function(ev){
         var currentCase = ev.toElement;
-        if(currentCase.classList.contains("case")){
+        if(Polymer.dom(currentCase).classList.contains("case")){
           this.putFocusOnCase(currentCase);
         }
       }.bind(this);
 
       var onCaseOut = function(ev){
         var currentCase = ev.fromElement;
-        if(currentCase.classList.contains("case")){
+        if(Polymer.dom(currentCase).classList.contains("case")){
           this.removeFocus(currentCase);
         }
       }.bind(this);
@@ -61,9 +69,11 @@
         var isOK = true;
         var actualLength = 0;
 
+        var localUserWord = "";
         for(idx = 0; idx < this.word.length; idx++){
           var expectedLetter = this.word[idx];
           var actualLetter = this.getCase(idx+1).letter;
+          localUserWord += actualLetter;
           if(actualLetter != " "){
             actualLength++;
           }
@@ -71,43 +81,53 @@
             isOK = false;
           }
         }
+        this._setUserWord(localUserWord);
 
         var isKO = (!isOK) && (actualLength == this.word.length);
+        var notifyResolutionChanged = false;
         if(isOK){
-          this.fire("dyw-crossword-ok");
-          this.classList.remove("ko");
-          this.classList.add("ok");
+          if(!Polymer.dom(this).classList.contains("ok")){
+            notifyResolutionChanged = true;
+          }
+          Polymer.dom(this).classList.remove("ko");
+          Polymer.dom(this).classList.add("ok");
         }else if(isKO){
-          this.fire("dyw-crossword-ko");
-          this.classList.remove("ok");
-          this.classList.add("ko");
+          if(!Polymer.dom(this).classList.contains("ko")){
+            notifyResolutionChanged = true;
+          }
+          Polymer.dom(this).classList.remove("ok");
+          Polymer.dom(this).classList.add("ko");
         }else{
-          this.classList.remove("ok");
-          this.classList.remove("ko");
+          if(Polymer.dom(this).classList.contains("ok") || Polymer.dom(this).classList.contains("ko")){
+            notifyResolutionChanged = true;
+          }
+          Polymer.dom(this).classList.remove("ok");
+          Polymer.dom(this).classList.remove("ko");
+        }
+
+        if(notifyResolutionChanged){
+          this.fire("dyw-crossword-resolution-changed");
         }
       }.bind(this);
 
       this.addEventListener("dyw-crosscase-letter-changed", evalWord);
 
-      this.addEventListener("dyw-crossword-ko", function(){console.log("ko !")});
-      this.addEventListener("dyw-crossword-ok", function(){console.log("ok !")});
-
       for(var idx in this.word){
         var divCase = document.createElement('dyw-crosscase');
-        divCase.className = "case";
+        this.toggleClass("case", true, divCase);
 
         if(this.orientation != "vertical")
           divCase.style.display = "inline-block";
 
-        // divCase.letter = this.word[idx];
         divCase.addEventListener("mouseover", onCaseOver);
         divCase.addEventListener("mouseout", onCaseOut);
 
-        this.$.cases.appendChild(divCase);
+        Polymer.dom(this).appendChild(divCase);
       }
+      Polymer.dom.flush();
     },
     resizeChildren: function(){
-      var cases = this.$.cases.getDistributedNodes();
+      var cases = Polymer.dom(this.$.cases).getDistributedNodes();
       for(var idx = 0; idx < cases.length; idx++)
       {
         var divCase = cases[idx];
@@ -117,11 +137,11 @@
     },
     getFocus : function()
     {
-      this.classList.add("focus");
+      Polymer.dom(this).classList.add("focus");
     },
     lostFocus : function()
     {
-      this.classList.remove("focus");
+      Polymer.dom(this).classList.remove("focus");
       if(this._focusedCase)
         this.removeFocus(this._focusedCase);
     },
@@ -137,9 +157,19 @@
         this._focusedCase = null;
       }
     },
+    focusPreviousCase : function(){
+      if(this._focusedCase){
+        var previousCase = Polymer.dom(this._focusedCase).previousElementSibling;
+        if(previousCase){
+          this.putFocusOnCase(previousCase);
+        }else{
+          this.removeFocus(this._focusedCase);
+        }
+      }
+    },
     focusNextCase : function(){
       if(this._focusedCase){
-        var nextCase = this._focusedCase.nextElementSibling;
+        var nextCase = Polymer.dom(this._focusedCase).nextElementSibling;
         if(nextCase){
           this.putFocusOnCase(nextCase);
         }else{
@@ -153,9 +183,16 @@
         this.focusNextCase();
       }
     },
+    popKey : function(){
+      if(this._focusedCase){
+        this._focusedCase.letter = " ";
+        this.focusPreviousCase();
+      }
+    },
     getCase : function(iCaseIdx){
-      if(iCaseIdx > 0 && iCaseIdx <= this.$.cases.childElementCount){
-        return this.$.cases.children[iCaseIdx-1];
+      var cases = Polymer.dom(this.$.cases).getDistributedNodes();
+      if(iCaseIdx > 0 && iCaseIdx <= cases.length){
+        return cases[iCaseIdx-1];
       }
     }
   });

@@ -19,6 +19,9 @@
     :host dyw-cursor{
       display: none;
     }
+    :host *{
+      cursor: default;
+    };
   </style>
   <template>[[letter]]<dyw-cursor></dyw-cursor></template>
 </dom-module>
@@ -41,11 +44,11 @@
     },
     getFocus : function()
     {
-      this.classList.add("focus");
+      Polymer.dom(this).classList.add("focus");
     },
     lostFocus : function()
     {
-      this.classList.remove("focus");
+      Polymer.dom(this).classList.remove("focus");
     }
   });
 </script>

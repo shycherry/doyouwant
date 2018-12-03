@@ -1,5 +1,8 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/shy-elt-boggle/shy-elt-boggle.html"/>
+<link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../dyw-page/dyw-page-behavior.html"/>
+<link rel="import" href="../dyw-page/dyw-page.html"/>
 <link rel="import" href="../dyw-cursor/dyw-cursor.html">
 
 <dom-module name="dyw-boggle-page">
@@ -7,6 +10,10 @@
     :host{
       position: absolute;
       width: 100%;
+    }
+    div{
+      margin: 1em;
+      margin-top: 0px;
     }
     #right{
       /*overflow: hidden;*/
@@ -23,28 +30,33 @@
     }
   </style>
   <template>
-    <div id="left">
-      <div>Voulez-vous...trouver César ?</div>
-      <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
-    </div>
-    <div id="right">
-      <div><span id="currentKeys"></span><dyw-cursor></dyw-cursor><span id="hint">Prête chère amie ? Bogglez !</span></div>
-      <br/>
-      <div>1. <span id="one"></span></div>
-      <div>2. <span id="two"></span></div>
-      <div>3. <span id="three"></span></div>
-      <div>4. <span id="four"></span></div>
-      <div>5. <span id="five"></span></div>
-    </div>
+    <dyw-page id="page" transition-text=[[getPageName()]]>
+      <div id="left">
+        <div>Un petit boggle...</div>
+        <shy-elt-boggle no-time elt-size="400">UOSEZWTRRACETONG</shy-elt-boggle>
+      </div>
+      <div id="right">
+        <div><span id="currentKeys"></span><dyw-cursor></dyw-cursor><span id="hint">Prête chère amie ? Bogglez !</span></div>
+        <br/>
+        <div>1. <span id="one"></span></div>
+        <div>2. <span id="two"></span></div>
+        <div>3. <span id="three"></span></div>
+        <div>4. <span id="four"></span></div>
+        <div>5. <span id="five"></span></div>
+      </div>
+    </dyw-page>
   </template>
 </dom-module>
 
 <script>
   Polymer({
     is: "dyw-boggle-page",
+    behaviors: [DYW.PageBehavior],
     created : function(){
+      this.setPageName("Voulez-vous...trouver ce que dit César ?");
       this._showHint = function(iHintText){
         this.$.hint.innerText = iHintText;
+        this.fire("dyw-tip", iHintText);
       }.bind(this);
 
       this._clearKeys = function(iUpponSuccess){
@@ -54,12 +66,12 @@
         else if(this._nbWordToFind)
           this._showHint("Mmmh... autre chose ?");
         else
-          this._showHint("OK bravo !... Alors que dit César ? :)");
+          this._showHint("OK bravo !... La clef est SCHATZ. Alors que dit César ? :)");
       }.bind(this);
 
       this._expectedWords = {"CAR":"one", "TON":"two", "SOU":"three", "ETAT":"four", "GERE":"five"};
 
-      this._cesarSay = "WOUAF";
+      this._cesarSay = "ARMAND";
 
       this._onKeyPress = function(ev){
         if(this._idTime)
@@ -83,7 +95,11 @@
       this._nbWordToFind = 5;
     },
     bindPage : function(){
-      document.addEventListener("keypress", this._onKeyPress);
+      this.fire("dyw-tip", this.getPageName());
+      this.$.page.startTransition()
+      .then(function(){
+        document.addEventListener("keypress", this._onKeyPress);
+      }.bind(this));
     },
     unbindPage : function(){
       document.removeEventListener("keypress", this._onKeyPress);

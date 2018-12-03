@@ -6,18 +6,25 @@
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <script>
-      window.Polymer = window.Polymer || {};
-      window.Polymer.dom = 'shadow';
+      // window.Polymer = window.Polymer || {};
+      // window.Polymer.dom = 'shadow';
     </script>
+    <link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html"/>
     <link rel="import" href="bower_components/iron-pages/iron-pages.html"/>
+    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html"/>
+    <link rel="import" href="bower_components/paper-tabs/paper-tab.html"/>
+    <link rel="import" href="bower_components/neon-animation/neon-animated-pages.html"/>
+    <link rel="import" href="bower_components/neon-animation/neon-animations.html"/>
     <link rel="import" href="dyw-boggle-page/dyw-boggle-page.html"/>
     <link rel="import" href="dyw-cesarheart-page/dyw-cesarheart-page.html"/>
     <link rel="import" href="dyw-crosswords-page/dyw-crosswords-page.html"/>
+    <link rel="import" href="dyw-player/dyw-player.html"/>
     <style type="text/css">
       * /deep/ *{
         font-family:'Freestyle Script';font-size:38px;font-weight:normal;font-style:normal;
       }
       body{
+        /*display: none;*/
         background-image: url("paper-background-10.jpg");
         background-size: cover;
         overflow: hidden;
@@ -26,14 +33,34 @@
     </style>
   </head>
 
-  <body>
-    <audio src="la_flamme_lunettes_in_out.ogg" autoplay loop></audio>
+  <body class="fullbleed">
+    <dyw-player>
+      <dyw-track src="music/1inout.ogg"></dyw-track>
+      <dyw-track src="music/2inout.ogg"></dyw-track>
+      <dyw-track src="music/3inout.ogg"></dyw-track>
+      <dyw-track src="music/4inout.ogg"></dyw-track>
+      <dyw-track src="music/5inout.ogg"></dyw-track>
+    </dyw-player>
     <template is="dom-bind" id="app">
-      <iron-pages id="pages" selected="[[page]]" attr-for-selected="app-page">
-        <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
+      <style type="text/css">
+        #tabs {
+          background: lightgray;
+        }
+        #tip {
+          z-index: 10;
+        }
+      </style>
+      <paper-toast duration="5000" text="test" id="tip"></paper-toast>
+      <paper-tabs id="tabs" selected="{{page}}" attr-for-selected="app-page">
+        <paper-tab app-page="crosswords">1er</paper-tab>
+        <paper-tab app-page="boggle">2ème</paper-tab>
+        <paper-tab app-page="cesarheart">3ème</paper-tab>
+      </paper-tabs>
+      <neon-animated-pages id="pages" selected="{{page}}" attr-for-selected="app-page" entry-animation="slide-from-right-animation" exit-animation="slide-left-animation">
         <dyw-crosswords-page app-page="crosswords"></dyw-crosswords-page>
+        <dyw-boggle-page app-page="boggle"></dyw-boggle-page>
         <dyw-cesarheart-page app-page="cesarheart"></dyw-cesarheart-page>
-      </iron-pages>
+      </neon-animated-pages>
     </template>
     <script src="app.js"></script>
   </body>

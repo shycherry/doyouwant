@@ -1,4 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../dyw-page/dyw-page-behavior.html"/>
+<link rel="import" href="../dyw-page/dyw-page.html"/>
 <link rel="import" href="./dyw-crosswords.html"/>
 <link rel="import" href="./dyw-crossword.html"/>
 <link rel="import" href="./dyw-crossmatchbox.html"/>
@@ -7,48 +9,72 @@
   <style>
     :host{
       display: block;
-      height: 100%;
       width: 100%;
+    }
+    :host dyw-crossword.focus[orientation="vertical"]{
+      background-color: plum;
+    }
+    :host dyw-crossword.focus[orientation="horizontal"]{
+      background-color: lightblue;
+    }
+    div,dyw-crosswords{
+      margin: 1em;
+      margin-top: 0px;
     }
   </style>
   <template>
-    <div>Voulez-vous... ?</div>
-    <dyw-crosswords style="width:100%;" id="crosswords" case-size="50">
-      <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w1" word="LANGUES" orientation="vertical"></dyw-crossword>
-      <dyw-crossword id="w2" word="ECRAN" orientation="horizontal"></dyw-crossword>
-      <dyw-crossword id="w3" word="PAPIER" orientation="vertical"></dyw-crossword>
-      <dyw-crossword id="w4" word="APERITIF" orientation="horizontal"></dyw-crossword>
-      <!-- <dyw-crossword id="w5" word="CHICOREE" orientation="vertical"></dyw-crossword> -->
-      <!-- <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal"></dyw-crossword> -->
-      <!-- <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical"></dyw-crossword> -->
-      <!-- <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal"></dyw-crossword> -->
-      <!-- <dyw-crossword id="w9" word="STYLO" orientation="vertical"></dyw-crossword> -->
-      <dyw-crossmatchbox id1="w0" id2="w1" n1="11" n2="5"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w1" id2="w2" n1="2" n2="4"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w0" id2="w3" n1="2" n2="2"></dyw-crossmatchbox>
-      <dyw-crossmatchbox id1="w3" id2="w4" n1="4" n2="5"></dyw-crossmatchbox>
-    </dyw-crosswords>
+    <dyw-page id="page" transition-text="Il arrive parfois que des directions perpendiculaires deviennent parallèles">
+      <div>{{getPageName()}}</div>
+      <dyw-crosswords style="width:100%;" id="crosswords" case-size="50">
+        <dyw-crossword id="w0" word="MATHEMATIQUES" orientation="horizontal" tip="Ma matière thématique à moi"></dyw-crossword>
+        <dyw-crossword id="w1" word="LANGUES" orientation="vertical" tip="Mortes ou vivantes, devraient toujours tourner 7 fois"></dyw-crossword>
+        <dyw-crossword id="w2" word="ECRAN" orientation="horizontal" tip="TVs, Smartphones, Ordinateurs... tous en ont un"></dyw-crossword>
+        <dyw-crossword id="w3" word="PAPIER" orientation="vertical" tip="Négation de 'pier'"></dyw-crossword>
+        <dyw-crossword id="w4" word="APERITIF" orientation="horizontal" tip="Rituel d'avant repas"></dyw-crossword>
+        <dyw-crossword id="w5" word="YAOURT" orientation="vertical" tip="Ceci n'est pas un dessert !"></dyw-crossword>
+        <dyw-crossword id="w6" word="PIQUANT" orientation="horizontal" tip="Bout de hérisson, qui n'est pas doux"></dyw-crossword>
+        <dyw-crossword id="w7" word="DOUCEUR" orientation="vertical" tip="Ce qui accompagne toujours le café à l'heure douce"></dyw-crossword>
+        <dyw-crossword id="w8" word="CLAVIER" orientation="horizontal" tip="Stylo d'informaticien"></dyw-crossword>
+        <dyw-crossword id="w9" word="STYLO" orientation="vertical" tip="Clavier de littéraire"></dyw-crossword>
+        <dyw-crossmatchbox id1="w0" id2="w1" n1="7" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w1" id2="w6" n1="5" n2="4"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w6" id2="w9" n1="7" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w9" id2="w8" n1="4" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w8" id2="w7" n1="6" n2="5"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w7" id2="w2" n1="7" n2="3"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w0" id2="w5" n1="2" n2="2"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w0" id2="w3" n1="5" n2="5"></dyw-crossmatchbox>
+        <dyw-crossmatchbox id1="w3" id2="w4" n1="1" n2="2"></dyw-crossmatchbox>
+      </dyw-crosswords>
+    </dyw-page>
   </template>
 </dom-module>
 
 <script>
   Polymer({
     is: "dyw-crosswords-page",
+    behaviors: [DYW.PageBehavior],
     created : function(){
-      this._showHint = function(iHintText){
-        this.$.hint.innerText = iHintText;
+      this.setPageName("A la croisée des chemins...");
+      this._onKeyPress = function(ev){
+        if(ev.keyCode == 8){
+          this.$.crosswords.popKey();
+        }else if(65 <= ev.keyCode && ev.keyCode <= 90){
+          this.$.crosswords.pushKey(String.fromCharCode(ev.keyCode).toUpperCase());
+        }
       }.bind(this);
 
-      this._onKeyPress = function(ev){
-        this.$.crosswords.pushKey(String.fromCharCode(ev.charCode).toUpperCase());
-      }.bind(this);
+      this.addEventListener("dyw-crosswords-resolved", this.fire.bind(this, "dyw-page-finished"));
     },
     bindPage : function(){
-      document.addEventListener("keypress", this._onKeyPress);
+      this.fire("dyw-tip", this.getPageName());
+      this.$.page.startTransition()
+      .then(function(){
+        document.addEventListener("keydown", this._onKeyPress);
+      }.bind(this));
     },
     unbindPage : function(){
-      document.removeEventListener("keypress", this._onKeyPress);
+      document.removeEventListener("keydown", this._onKeyPress);
     }
   });
 </script>

@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html"/>
+<link rel="import" href="../bower_components/iron-flex-layout/classes/iron-flex-layout.html"/>
+<link rel="import" href="dyw-page-behavior.html">
+<link rel="import" href="dyw-page-content.html">
+
+<dom-module name="dyw-page">
+  <template>
+    <neon-animated-pages id="pages" selected="text" attr-for-selected="local-page" entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+      <dyw-page-content local-page="text">
+        <div class="self-center">{{transitionText}}</div>
+      </dyw-page-content>
+      <dyw-page-content local-page="content"><content></content></dyw-page-content>
+    </neon-animated-pages>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "dyw-page",
+    behaviors: [DYW.PageBehavior],
+    properties:{
+      transitionText: {type: String, value: "Blabla"}
+    },
+    ready : function(){
+      this.$.pages.addEventListener('iron-select', function(ev){
+        ev.stopPropagation();
+      });
+
+      this.$.pages.addEventListener('iron-deselect', function(ev){
+        ev.stopPropagation();
+      });
+    },
+    startTransition : function(){
+      if(!this.promise){
+        this.promise = new Promise(function(resolve, reject){
+          this.async(function(){
+            this.$.pages.selected = "content";
+            resolve();
+          }.bind(this), 10000);
+        }.bind(this));
+      }
+      return this.promise;
+    }
+  });
+</script>

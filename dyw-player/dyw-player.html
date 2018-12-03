@@ -1,0 +1,34 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module name="dyw-player">
+  <template>
+    <content id="tracks" select="dyw-track"></content>
+    <audio id="audio" src="[[currentSrc]]" autoplay></audio>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "dyw-player",
+    ready : function(){
+      this.playNext();
+      this.$.audio.addEventListener("ended", this.playNext.bind(this));
+    },
+    getTracks : function(){
+      return Array.prototype.slice.call(Polymer.dom(this.$.tracks).getDistributedNodes());
+    },
+    getNext : function(){
+      var nextTrack = null;
+      if(this.currentTrack){
+        nextTrack = Polymer.dom(this.currentTrack).nextElementSibling;
+      }
+      this.currentTrack = nextTrack || this.getTracks()[0];
+      return this.currentTrack;
+    },
+    playNext : function(){
+      var track = this.getNext();
+      this.currentSrc = track.getAttribute("src");
+      this.$.audio.play();
+    }
+  });
+</script>

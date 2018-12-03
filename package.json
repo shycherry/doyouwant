@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "node-main": "server.js",
+  "single-instance": false,
   "window": {
-    "width": 1280,
-    "height": 768
+    "fullscreen": true,
+    "toolbar": false
   },
   "dependencies": {
     "IT_NODE": "shycherry/IT_NODE",

@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/iron-resizable-behavior/iron-resizable-behavior.html">
+<link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="./dyw-crossword.html"/>
 
 <dom-module name="dyw-crosswords">
@@ -28,33 +29,53 @@
     is: "dyw-crosswords",
     behaviors: [Polymer.IronResizableBehavior],
     properties:{
-      caseSize : {
-        type:Number,
-        value: 100
-      }
+      caseSize : {type:Number,value: 100},
+      resolved : {type:Boolean, value: false, readOnly: true, notify: true}
     },
     ready : function(){
+      var filter = Array.prototype.filter;
       this.layoutChildren = this.layoutChildren.bind(this);
 
       this.addEventListener("iron-resize", this.layoutChildren);
       this.addEventListener("mouseover", function(ev){
-        var currentNode = ev.toElement;
-        if(currentNode.nodeName == "DYW-CROSSWORD"){
-          currentNode.getFocus();
-          this._focusedCrossword = currentNode;
+        var currentCrossword = filter.call(Polymer.dom(ev).path, function(elt){
+          return (elt.nodeName === "DYW-CROSSWORD");
+        })[0];
+
+        if(currentCrossword){
+          currentCrossword.getFocus();
+          this._focusedCrossword = currentCrossword;
+          this.fire("dyw-tip", currentCrossword.tip);
         }
       });
       this.addEventListener("mouseout", function(ev){
-        var currentNode = ev.fromElement;
-        if(currentNode.nodeName == "DYW-CROSSWORD"){
-          currentNode.lostFocus();
+        var currentCrossword = filter.call(Polymer.dom(ev).path, function(elt){
+          return (elt.nodeName === "DYW-CROSSWORD");
+        })[0];
+
+        if(currentCrossword){
+          currentCrossword.lostFocus();
           this._focusedCrossword = null;
         }
       });
+      this.addEventListener("dyw-crossword-resolution-changed", this.checkResolution);
+    },
+    checkResolution : function(){
+      var crosswords = Polymer.dom(this.$.crosswords).getDistributedNodes();
+      for(var idx = 0; idx < crosswords.length; idx++)
+      {
+        var currentCrossword = crosswords[idx];
+        if(!Polymer.dom(currentCrossword).classList.contains("ok")){
+          this._setResolved(false);
+          return;
+        }
+      }
+      this.fire("dyw-crosswords-resolved");
+      this._setResolved(true);
     },
     layoutChildren : function(){
       var positions = {};
-      var crosswords = this.$.crosswords.getDistributedNodes();
+      var crosswords = Polymer.dom(this.$.crosswords).getDistributedNodes();
 
       // init positions
       for(var idx = 0; idx < crosswords.length; idx++)
@@ -63,14 +84,14 @@
         positions[currentCrossword.id] = {"x":0,"y":0};
       }
 
-      var crosswordMatchBoxes = this.$.crossmatchboxes.getDistributedNodes();
+      var crosswordMatchBoxes = Polymer.dom(this.$.crossmatchboxes).getDistributedNodes();
 
       // compute positions, link cases
       for(var idx = 0; idx < crosswordMatchBoxes.length; idx++)
       {
         var currentCrossMatchBox = crosswordMatchBoxes[idx];
-        var crossword1 = this.querySelector('#'+currentCrossMatchBox.id1);
-        var crossword2 = this.querySelector('#'+currentCrossMatchBox.id2);
+        var crossword1 = Polymer.dom(this).querySelector('#'+currentCrossMatchBox.id1);
+        var crossword2 = Polymer.dom(this).querySelector('#'+currentCrossMatchBox.id2);
 
         if(crossword2.orientation == "horizontal")
         {
@@ -113,6 +134,10 @@
     pushKey : function(iKey){
       if(this._focusedCrossword)
         this._focusedCrossword.pushKey(iKey);
+    },
+    popKey : function(iKey){
+      if(this._focusedCrossword)
+        this._focusedCrossword.popKey();
     }
   });
 </script>
