@@ -23,5 +23,9 @@
     "shy-elt-boggle": "shycherry/shy-elt-boggle#migration-to-polymer-1.0.0",
     "paper-styles": "PolymerElements/paper-styles#~1.0.11",
     "paper-tabs": "PolymerElements/paper-tabs#~1.0.4"
+  },
+  "resolutions": {
+    "iron-resizable-behavior": "1.0.2",
+    "polymer": "^1.2.4"
   }
 }

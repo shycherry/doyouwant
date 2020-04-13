@@ -3,24 +3,24 @@ var switchPage = null;
 
 app.addEventListener("dom-change", function () {
 
-  this.$.pages.addEventListener('iron-select', function(ev){
+  this.$.pages.addEventListener('iron-select', function (ev) {
     ev.detail.item.bindPage();
   });
 
-  this.$.pages.addEventListener('iron-deselect', function(ev){
+  this.$.pages.addEventListener('iron-deselect', function (ev) {
     ev.detail.item.unbindPage();
   });
 
-  this.$.pages.addEventListener('dyw-page-finished', function(ev){
-      this.selectNext();
+  this.$.pages.addEventListener('dyw-page-finished', function (ev) {
+    this.selectNext();
   });
 
-  this.$.pages.addEventListener('dyw-tip', function(ev){
+  this.$.pages.addEventListener('dyw-tip', function (ev) {
     app.$.tip.text = ev.detail;
     app.$.tip.show();
   });
 
-  switchPage = function(iPageName){
+  switchPage = function (iPageName) {
     this.page = iPageName;
   }.bind(this);
 
@@ -29,49 +29,49 @@ app.addEventListener("dom-change", function () {
   // switchPage("cesarheart");
 });
 
-var ITNode = require("IT_NODE").ITNode;
+// var ITNode = require("IT_NODE").ITNode;
 
-var itNode = new ITNode();
-var myport = itNode.port;
+// var itNode = new ITNode();
+// var myport = itNode.port;
 
-function youdoHandler(data, itSocket){
-  console.log("log server side : " + data);
-  itSocket.on("mousemove", function(x,y){
-    console.log("received mouse "+x+" "+y);
-  });
-  return "echo "+data;
-};
+// function youdoHandler(data, itSocket){
+//   console.log("log server side : " + data);
+//   itSocket.on("mousemove", function(x,y){
+//     console.log("received mouse "+x+" "+y);
+//   });
+//   return "echo "+data;
+// };
 
-itNode.addService({
-  name : "echo",
-  handler : youdoHandler
-});
+// itNode.addService({
+//   name : "echo",
+//   handler : youdoHandler
+// });
 
-function connect(ipport){
+// function connect(ipport){
 
 
-  return itNode.getManager()
-  .then(function(manager){
-    return manager.getUuidsDeepTaggedBy("echo")
-    .then(function(uuids){
-        var args = {
-          "it_service" : uuids[0],
-          "params" : "yo !"
-        };
+//   return itNode.getManager()
+//   .then(function(manager){
+//     return manager.getUuidsDeepTaggedBy("echo")
+//     .then(function(uuids){
+//         var args = {
+//           "it_service" : uuids[0],
+//           "params" : "yo !"
+//         };
 
-        return itNode.callService( args )
-        .then(function(link){
-          console.log("log client side : "+link["link_response"]);
-          window.addEventListener("mousemove", function(ev){
-            link["link_socket"].emit("mousemove",ev.x, ev.y);
-          });
-        })
-        .catch(function(err){
-          console.error(err);
-        });
+//         return itNode.callService( args )
+//         .then(function(link){
+//           console.log("log client side : "+link["link_response"]);
+//           window.addEventListener("mousemove", function(ev){
+//             link["link_socket"].emit("mousemove",ev.x, ev.y);
+//           });
+//         })
+//         .catch(function(err){
+//           console.error(err);
+//         });
 
-    });
-  });
+//     });
+//   });
 
-}
+// }
 

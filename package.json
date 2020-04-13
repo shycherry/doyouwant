@@ -2,20 +2,18 @@
   "name": "doyouwant",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html",
+  "main": "index.js",
   "single-instance": false,
   "window": {
     "fullscreen": true,
     "toolbar": false
   },
-  "dependencies": {
-    "IT_NODE": "shycherry/IT_NODE",
-    "nw": "^0.12.1"
+  "devDependencies": {
+    "electron": "^8.2.2"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nw"
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC"
