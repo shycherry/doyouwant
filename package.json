@@ -9,7 +9,7 @@
     "toolbar": false
   },
   "devDependencies": {
-    "electron": "^8.2.2"
+    "electron": "^8.5.1"
   },
   "scripts": {
     "start": "electron .",
